@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Protonyx Vector — Portfolio Analytics</title>
+  <link rel="icon" type="image/png" href="assets/vector_taskbar.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -115,12 +116,41 @@
     .logo-icon {
       width: 32px; height: 32px;
       border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--bg);
+      object-fit: contain;
+    }
+    .logo-text {
+      height: 20px;
+      object-fit: contain;
+    }
+    /* Hero logo */
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s 0.05s ease-out both;
+    }
+    .hero-logo .protonyx-mark {
+      width: 64px; height: 64px;
+      object-fit: contain;
+    }
+    .hero-logo .vector-wordmark {
+      height: 48px;
+      object-fit: contain;
+    }
+    /* Footer logo */
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .footer-logo img {
+      height: 22px;
+      object-fit: contain;
+      opacity: 0.5;
     }
     nav a.nav-link {
       color: var(--text-muted);
@@ -406,8 +436,8 @@
   <nav>
     <div class="inner">
       <a class="logo" href="#">
-        <div class="logo-icon">PV</div>
-        Protonyx Vector
+        <img class="logo-icon" src="assets/vector_taskbar.png" alt="Protonyx Vector" />
+        <img class="logo-text" src="assets/vector_full.png" alt="VECTOR" />
       </a>
       <div class="nav-links">
         <a class="nav-link" href="#features">Features</a>
@@ -420,6 +450,10 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
+      <div class="hero-logo">
+        <img class="protonyx-mark" src="assets/protonyx_logo.png" alt="Protonyx" />
+        <img class="vector-wordmark" src="assets/vector_full.png" alt="VECTOR" />
+      </div>
       <div class="badge">
         <span class="dot"></span>
         v1.0 — Now Available
@@ -523,6 +557,10 @@
   <!-- Footer -->
   <footer>
     <div class="container">
+      <div class="footer-logo">
+        <img src="assets/protonyx_logo.png" alt="Protonyx" />
+        <img src="assets/vector_full.png" alt="Vector" />
+      </div>
       <p>
         Protonyx Vector &copy; 2025 Matthew Goley · 
         <a href="https://github.com/Matthew-Goley/Protonyx-Vector-.exe" target="_blank">GitHub</a>
