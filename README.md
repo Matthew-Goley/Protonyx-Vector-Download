@@ -14,7 +14,7 @@ Head to the [Releases](https://github.com/Matthew-Goley/Protonyx-Vector-.exe/rel
  
 ## What's in this repo
  
-This repository hosts the GitHub Pages site for Vector — the landing page you see at [protonyx.dev](https://matthew-goley.github.io/Protonyx-Vector-Download/) (or wherever the page is deployed). It is not the application source code.
+This repository hosts the GitHub Pages site for Vector — the landing page you see at [protonyx.dev](https://matthew-goley.github.io/Protonyx-Vector-Download/). It is not the application source code.
  
 For the full Python source, see [Protonyx-Vector-Python](https://github.com/Matthew-Goley/Protonyx-Vector-Python).
  
