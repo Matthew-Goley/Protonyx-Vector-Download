@@ -10,8 +10,6 @@ const videoElement = document.getElementById("heroVideo");
 
 setInterval(() => {
   current = (current + 1) % videos.length;
-
   videoElement.src = videos[current];
-  videoElement.load();
   videoElement.play();
-}, 5000); // change every 5 seconds
+}, 5000);

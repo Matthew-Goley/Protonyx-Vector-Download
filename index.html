@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
-  <script src="script.js"></script>
   <title>Home | Protonyx</title>
 </head>
 <body>
@@ -24,15 +23,18 @@
 
   <!-- HERO -->
   <section id="hero">
-    <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
-      <source src="assets/video/1vector_demo.mp4" type="video/mp4">
-    </video>
+    <video autoplay muted playsinline class="hero-video" id="heroVideo" src="assets/video/1vector_demo.mp4"></video>
     
     <div class="hero-content">
       <h1>
         <span>Intelligence,</span><br>
         <span>Engineered.</span>
       </h1>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="arrow">↓</div>
+      <p>Scroll to Explore</p>
     </div>
   </section>
 
@@ -48,5 +50,6 @@
     </nav>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>

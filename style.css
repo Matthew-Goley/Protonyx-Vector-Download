@@ -211,6 +211,39 @@ section {
   color: var(--text-muted);
 }
 
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+
+  z-index: 2;
+}
+
+.scroll-indicator p {
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.arrow {
+  font-size: 24px;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
 .spacer {
   height: 2000px;
 }
