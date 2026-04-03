@@ -248,6 +248,47 @@ section {
   height: 2000px;
 }
 
+/* ── Light sections (below hero) ── */
+.tagline-section {
+  background: #f2f1ee;
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 7rem 6%;
+}
+
+.tagline-text {
+  max-width: 1300px;
+  margin: 0 auto;
+  font-size: clamp(1.6rem, 3.2vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #1a1a1a !important;
+  text-align: left;
+}
+
+.light-bg {
+  background: #f2f1ee;
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+}
+
+.footer-light {
+  background: #f2f1ee;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: #4a4a4a;
+}
+
+.footer-light a {
+  color: #4a4a4a;
+}
+
+.footer-light a:hover {
+  color: #1a1a1a;
+}
+
 /* ── Features ── */
 #features {
   background: var(--bg-surface);
