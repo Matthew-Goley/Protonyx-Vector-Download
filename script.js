@@ -1,8 +1,9 @@
 const videos = [
   "assets/video/1vector_demo.mp4",
-  "assets/video/2codingdemo.mp4",
-  "assets/video/3stockmarket.mp4",
-  "assets/video/4codingdemo.mp4"
+  "assets/video/2city.mp4",
+  "assets/video/3codingdemo.mp4",
+  "assets/video/4stockmarket.mp4",
+  "assets/video/5codingdemo.mp4"
 ];
 
 let current = 0;
@@ -12,4 +13,4 @@ setInterval(() => {
   current = (current + 1) % videos.length;
   videoElement.src = videos[current];
   videoElement.play();
-}, 5000);
+}, 4000);
