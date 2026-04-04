@@ -12,7 +12,7 @@
   <!-- NAV -->
   <nav class="site-nav">
     <div class="logo">
-      <img src="assets/company/logo_full.png" alt="Protonyx logo">
+      <img src="assets/company/protonyx_full.png" alt="Protonyx logo">
     </div>
     <div class="menu-icon">
       <span></span>
@@ -48,6 +48,30 @@
       <div class="section-label-row">
         <h2>Our Systems</h2>
       </div>
+
+      <a href="/products/vector" class="product-link">
+        <div class="product-card vector-card">
+
+          <div class="product-info">
+            <img src="assets/product/vector/vector_full.png" alt="Vector icon" class="product-icon">
+            <h3 class="product-text">Our flagship product, Vector, is an financial application that provides personalized insights and recommendations based on your unique financial data.</h3>
+          </div>
+
+          <div class="product-preview">
+            <video
+              class="preview-video"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
+              <source src="assets/video/1vector_demo.mp4" type="video/mp4">
+            </video>
+
+            <div class="preview-version">v0.4.0</div>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -64,5 +88,19 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    const vectorCard = document.querySelector('.vector-card');
+    const vectorVideo = vectorCard.querySelector('.preview-video');
+
+    vectorCard.addEventListener('mouseenter', () => {
+      vectorVideo.currentTime = 0;
+      vectorVideo.play();
+    });
+
+    vectorCard.addEventListener('mouseleave', () => {
+      vectorVideo.pause();
+      vectorVideo.currentTime = 0;
+    });
+  </script>
 </body>
 </html>

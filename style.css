@@ -7,12 +7,12 @@
 
 :root {
   --grad: linear-gradient(135deg, #3a8c6e, #2a6b9a);
-  --bg-base: #0f1117;
-  --bg-surface: #161b25;
-  --bg-card: #1c2333;
-  --border: rgba(255, 255, 255, 0.07);
-  --text-primary: #f0f2f5;
-  --text-muted: #8b95a8;
+  --bg-base: #f2f1ee;
+  --bg-surface: #d7d4d4;
+  --bg-card: #8b95a8;
+  --border: rgb(142, 142, 142);
+  --text-primary: #1f2230;
+  --text-muted: #434343;
   --accent-green: #3a8c6e;
   --accent-blue: #2a6b9a;
 }
@@ -32,8 +32,8 @@ body {
 /* ── Typography ── */
 h1 { font-size: 3.2rem; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
 h2 { font-size: 2rem; font-weight: 600; margin-bottom: 2.5rem; text-align: center; }
-h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-p  { color: var(--text-muted); }
+h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);}
+p  { color: var(--text-primary); }
 
 /* ── Gradient text utility ── */
 .grad-text {
@@ -154,13 +154,13 @@ section {
 .about-wrap {
   display: flex;
   flex-direction: column;
-  gap: 7rem;
+  gap: 3rem;
 }
 
 .tagline-section {
   background: #f2f1ee;
   width: 100%;
-  padding: 7rem 0;
+  padding: 4rem 0;
 }
 
 .tagline-text {
@@ -291,7 +291,7 @@ section {
 }
 
 .spacer {
-  height: 2000px;
+  height: 500px;
 }
 
 /* ── Light sections (below hero) ── */
@@ -337,6 +337,122 @@ section {
 
 .footer-light a:hover {
   color: #1a1a1a;
+}
+
+/* ── Product cards ── */
+.product-link {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+.product-card {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 24px;
+
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  padding: 2rem;
+  max-width: 600px;
+
+  transition: all 0.25s ease;
+  cursor: pointer;
+
+  overflow: hidden;
+}
+
+.product-card:hover {
+  background: var(--bg-surface);
+}
+
+.product-icon {
+  width: 400px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+/* ── Vector ── */
+.product-card {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 24px;
+
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  padding: 2rem;
+  width: 100%;
+  max-width: 950px;
+
+  transition: all 0.25s ease;
+  cursor: pointer;
+
+  overflow: hidden;
+}
+
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-preview {
+  position: relative;
+  flex: 0 0 320px;
+  height: 100%;
+  min-height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+
+  background: transparent;
+  border: 1px solid rgba(31, 34, 48, 0.12);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.vector-card:hover .product-preview {
+  background: linear-gradient(135deg, #2dd4bf, #38bdf8, #1e3a8a);
+  border-color: transparent;
+}
+
+.preview-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.preview-version {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  z-index: 2;
+  transition: opacity 0.25s ease;
+}
+
+.vector-card:hover .preview-video {
+  opacity: 1;
+}
+
+.vector-card:hover .preview-version {
+  opacity: 0;
 }
 
 /* ── Features ── */
