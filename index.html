@@ -9,22 +9,28 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="site-nav">
-    <div class="logo">
+  <nav class="navbar">
+    <div class="navbar-logo">
       <img src="assets/company/protonyx_full.png" alt="Protonyx logo">
     </div>
-    <div class="menu-icon">
+
+    <div class="navbar-menu-button">
       <span></span>
       <span></span>
       <span></span>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <video autoplay muted playsinline class="hero-video" id="heroVideo" src="assets/video/1vector_demo.mp4"></video>
-    
+  <section class="hero">
+    <video
+      autoplay
+      muted
+      playsinline
+      class="hero-video"
+      id="heroVideo"
+      src="assets/video/1vector_demo.mp4"
+    ></video>
+
     <div class="hero-content">
       <h1>
         <span>Intelligence,</span><br>
@@ -33,31 +39,35 @@
     </div>
 
     <div class="scroll-indicator">
-      <div class="arrow">↓</div>
+      <div class="scroll-arrow">↓</div>
       <p>Scroll to Explore</p>
     </div>
   </section>
 
-  <!-- TAGLINE -->
-  <section id="about" class="tagline-section">
-    <div class="container about-wrap">
-      <p class="tagline-text">
+  <section class="intro-section">
+    <div class="section-shell">
+      <p class="intro-text">
         Our systems turn financial data into clear answers, empowering individuals to make smarter investment decisions.
       </p>
 
-      <div class="section-label-row">
+      <div class="section-heading">
         <h2>Our Systems</h2>
       </div>
 
       <a href="/products/vector" class="product-link">
         <div class="product-card vector-card">
-
-          <div class="product-info">
-            <img src="assets/product/vector/vector_full.png" alt="Vector icon" class="product-icon">
-            <h3 class="product-text">Our flagship product, Vector, is an financial application that provides personalized insights and recommendations based on your unique financial data.</h3>
+          <div class="product-details">
+            <img
+              src="assets/product/vector/vector_full.png"
+              alt="Vector icon"
+              class="product-logo"
+            >
+            <h3 class="product-description">
+              Our flagship product, Vector, is a financial application that provides personalized insights and recommendations based on your unique financial data.
+            </h3>
           </div>
 
-          <div class="product-preview">
+          <div class="product-preview-panel">
             <video
               class="preview-video"
               muted
@@ -75,11 +85,11 @@
     </div>
   </section>
 
-  <section class="spacer light-bg"></section>
+  <section class="page-spacer"></section>
 
-  <!-- FOOTER -->
-  <footer class="footer-light">
+  <footer class="site-footer">
     <p>&copy; 2026 Protonyx LLC. All rights reserved.</p>
+
     <nav class="footer-links">
       <a href="#">Terms of Service</a>
       <a href="#">Privacy Policy</a>

@@ -1,4 +1,4 @@
-const videos = [
+const heroVideoSources = [
   "assets/video/1vector_demo.mp4",
   "assets/video/2city.mp4",
   "assets/video/3codingdemo.mp4",
@@ -6,11 +6,14 @@ const videos = [
   "assets/video/5codingdemo.mp4"
 ];
 
-let current = 0;
-const videoElement = document.getElementById("heroVideo");
+let currentHeroVideoIndex = 0;
+
+const heroVideoElement = document.getElementById("heroVideo");
 
 setInterval(() => {
-  current = (current + 1) % videos.length;
-  videoElement.src = videos[current];
-  videoElement.play();
+  currentHeroVideoIndex =
+    (currentHeroVideoIndex + 1) % heroVideoSources.length;
+
+  heroVideoElement.src = heroVideoSources[currentHeroVideoIndex];
+  heroVideoElement.play();
 }, 4000);
