@@ -138,9 +138,55 @@ p  { color: var(--text-muted); }
 
 /* ── Sections ── */
 section {
-  padding: 6rem 6%;
+  padding: 6rem 0;
+}
+
+.container {
   max-width: 1100px;
   margin: 0 auto;
+  padding: 0 6%;
+}
+
+#about {
+  text-align: left;
+}
+
+.about-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+}
+
+.tagline-section {
+  background: #f2f1ee;
+  width: 100%;
+  padding: 7rem 0;
+}
+
+.tagline-text {
+  max-width: 1100px;
+  font-size: clamp(2rem, 4.8vw, 5.2rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #1f2230;
+  margin: 0;
+}
+
+.section-label-row h2 {
+  font-size: 2.8rem;
+}
+
+.section-label-row {
+  width: 100%;
+}
+
+.section-label-row h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 500;
+  color: #1f2230;
+  text-align: left;
 }
 
 /* ── Hero ── */
@@ -273,6 +319,10 @@ section {
   max-width: 100% !important;
   width: 100%;
   margin: 0 !important;
+}
+
+.header.light-bg h1 {
+  color: #1a1a1a;
 }
 
 .footer-light {
