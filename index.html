@@ -18,11 +18,11 @@
       >
     </div>
 
-    <div class="navbar-menu-button">
+    <button class="navbar-menu-button" aria-label="Open menu">
       <span></span>
       <span></span>
       <span></span>
-    </div>
+    </button>
   </nav>
 
   <section class="hero">
@@ -96,6 +96,33 @@
       <a class="btn-primary" href="/products/vector">Explore Vector →</a>
     </div>
   </section>
+
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-overlay-inner">
+        <div class="menu-overlay-header">
+          <div class="menu-overlay-brand">
+            <img src="assets/company/protonyx_full_white.png" alt="Protonyx logo">
+          </div>
+
+          <button class="menu-close-button" id="menuCloseButton" aria-label="Close menu">
+            ×
+          </button>
+        </div>
+
+        <div class="menu-overlay-content">
+          <div class="menu-column">
+            <p class="menu-label">Navigation</p>
+
+            <a href="/" class="menu-link-reveal">Home</a>
+            <a href="/products" class="menu-link-reveal">Products</a>
+            <a href="/products/vector" class="menu-link-reveal"> ⤷ Vector</a>
+            <a href="/careers" class="menu-link-reveal">Careers</a>
+            <a href="/about" class="menu-link-reveal">About</a>
+            <a href="/contact" class="menu-link-reveal">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <footer class="site-footer">
     <p>&copy; 2026 Protonyx LLC. All rights reserved.</p>
