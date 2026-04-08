@@ -499,15 +499,10 @@ p {
 }
 
 .products-label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
+  font-size: clamp(2.5rem, 5vw, 5rem);
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.products-wordmark {
-  height: 52px;
-  width: auto;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .site-footer {
