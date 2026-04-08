@@ -11,9 +11,9 @@
 
   <nav class="navbar">
     <div class="navbar-logo">
-      <img 
+      <img
         id="navbarLogo"
-        src="../assets/company/protonyx_full_white.png" 
+        src="../assets/company/protonyx_full_white.png"
         alt="Protonyx logo"
       >
     </div>
@@ -25,12 +25,106 @@
     </button>
   </nav>
 
+  <!-- ── Products hero ── -->
+  <section class="products-hero">
+    <div class="products-hero-inner">
+      <p class="products-label">Products</p>
+      <img
+        src="../assets/company/protonyx_full_white.png"
+        alt="Protonyx"
+        class="products-wordmark"
+      >
+    </div>
+  </section>
+
+  <!-- ── Product list ── -->
   <section class="intro-section">
     <div class="section-shell">
-      <p class="intro-text">
-        Our software turn financial data into clear answers, empowering individuals to make smarter investment decisions.
-      </p>
 
-      <div class="section-heading">
-        <h2>Our Software</h2>
+      <a href="/products/vector" class="product-link">
+        <div class="product-card vector-card">
+          <div class="product-details">
+            <img
+              src="../assets/product/vector/vector_full.png"
+              alt="Vector icon"
+              class="product-logo"
+            >
+            <h3 class="product-description">
+              Our flagship product, Vector, is a financial application that provides personalized insights and projections based on your unique financial data.
+            </h3>
+          </div>
+
+          <div class="product-preview-panel">
+            <video
+              class="preview-video"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
+              <source src="../assets/video/1vector_demo.mp4" type="video/mp4">
+            </video>
+
+            <div class="preview-version">v0.4.0</div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Menu overlay ── -->
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-overlay-inner">
+      <div class="menu-overlay-header">
+        <div class="menu-overlay-brand">
+          <img src="../assets/company/protonyx_full_white.png" alt="Protonyx logo">
+        </div>
+
+        <button class="menu-close-button" id="menuCloseButton" aria-label="Close menu">
+          ×
+        </button>
       </div>
+
+      <div class="menu-overlay-content">
+        <div class="menu-column">
+          <p class="menu-label">Navigation</p>
+
+          <a href="/" class="menu-link-reveal">Home</a>
+          <a href="/products" class="menu-link-reveal">Products</a>
+          <a href="/products/vector" class="menu-link-reveal"> ⤷ Vector</a>
+          <a href="/careers" class="menu-link-reveal">Careers</a>
+          <a href="/about" class="menu-link-reveal">About</a>
+          <a href="/contact" class="menu-link-reveal">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Protonyx LLC. All rights reserved.</p>
+
+    <nav class="footer-links">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact</a>
+    </nav>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    const vectorCard = document.querySelector('.vector-card');
+    const vectorVideo = vectorCard.querySelector('.preview-video');
+
+    vectorCard.addEventListener('mouseenter', () => {
+      vectorVideo.currentTime = 0;
+      vectorVideo.play();
+    });
+
+    vectorCard.addEventListener('mouseleave', () => {
+      vectorVideo.pause();
+      vectorVideo.currentTime = 0;
+    });
+  </script>
+</body>
+</html>
