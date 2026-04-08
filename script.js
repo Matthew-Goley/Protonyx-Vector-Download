@@ -60,35 +60,27 @@ const menuButton = document.querySelector(".navbar-menu-button");
 const menuOverlay = document.getElementById("menuOverlay");
 const menuCloseButton = document.getElementById("menuCloseButton");
 
-if (menuButton && menuOverlay && menuCloseButton) {
-  menuButton.addEventListener("click", () => {
-    menuOverlay.classList.add("open");
-    document.body.style.overflow = "hidden";
-  });
+const navbar = document.querySelector(".navbar");
 
-  menuCloseButton.addEventListener("click", () => {
-    menuOverlay.classList.remove("open");
-    document.body.style.overflow = "";
-  });
-
-  menuOverlay.addEventListener("click", (event) => {
-    if (event.target === menuOverlay) {
-      menuOverlay.classList.remove("open");
-      document.body.style.overflow = "";
-    }
-  });
-}
-
-menuButton.addEventListener("click", () => {
+function openMenu() {
+  menuOverlay.classList.remove("open");
+  void menuOverlay.offsetWidth; // force reflow so transitions restart
   menuOverlay.classList.add("open");
   document.body.style.overflow = "hidden";
+  if (navbar) navbar.style.opacity = 0;
+}
 
-  document.querySelector(".navbar").style.opacity = 0;
-});
-
-menuCloseButton.addEventListener("click", () => {
+function closeMenu() {
   menuOverlay.classList.remove("open");
   document.body.style.overflow = "";
+  if (navbar) navbar.style.opacity = 1;
+}
 
-  document.querySelector(".navbar").style.opacity = 1;
-});
+if (menuButton && menuOverlay && menuCloseButton) {
+  menuButton.addEventListener("click", openMenu);
+  menuCloseButton.addEventListener("click", closeMenu);
+
+  menuOverlay.addEventListener("click", (event) => {
+    if (event.target === menuOverlay) closeMenu();
+  });
+}

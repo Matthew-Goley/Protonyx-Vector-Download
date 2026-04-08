@@ -479,6 +479,10 @@ p {
   transition-delay: 0.32s;
 }
 
+.menu-column .menu-link-reveal:nth-of-type(6) {
+  transition-delay: 0.38s;
+}
+
 /* ── Products page hero ── */
 .products-hero {
   width: 100%;
