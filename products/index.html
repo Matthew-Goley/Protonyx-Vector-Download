@@ -3,45 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products — Protonyx</title>
   <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
+  <title>Products | Protonyx</title>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="logo"><a href="/" style="text-decoration:none;">Protonyx</a></div>
-    <a href="/" class="btn-nav">Home</a>
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img 
+        id="navbarLogo"
+        src="../assets/company/protonyx_full_white.png" 
+        alt="Protonyx logo"
+      >
+    </div>
+
+    <button class="navbar-menu-button" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <h1>Our Products</h1>
-    <p>Tools built for real investors, not Wall Street.</p>
-  </section>
+  <section class="intro-section">
+    <div class="section-shell">
+      <p class="intro-text">
+        Our software turn financial data into clear answers, empowering individuals to make smarter investment decisions.
+      </p>
 
-  <!-- PRODUCT LIST -->
-  <section id="features">
-    <div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-      <div class="feature-card">
-        <h3>Vector</h3>
-        <p>Portfolio analytics that tells you what's working, what isn't, and what to watch — in seconds.</p>
-        <br />
-        <a href="/products/vector" class="btn-primary">Learn more</a>
+      <div class="section-heading">
+        <h2>Our Software</h2>
       </div>
-      <!-- future products go here -->
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 Protonyx LLC. All rights reserved.</p>
-    <nav class="footer-links">
-      <a href="#">Terms of Service</a>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Contact</a>
-    </nav>
-  </footer>
-
-</body>
-</html>
