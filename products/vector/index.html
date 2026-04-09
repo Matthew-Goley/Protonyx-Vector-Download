@@ -24,6 +24,35 @@
       <span></span>
     </button>
   </nav>
+
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-overlay-inner">
+      <div class="menu-overlay-header">
+        <div class="menu-overlay-brand">
+          <img src="../../assets/company/protonyx_full_white.png" alt="Protonyx logo">
+        </div>
+        <button class="menu-close-button" id="menuCloseButton">×</button>
+      </div>
+      <div class="menu-overlay-content">
+        <div class="menu-column">
+          <p class="menu-label">Navigation</p>
+          <a href="/" class="menu-link-reveal">Home</a>
+          <a href="/products" class="menu-link-reveal">Products</a>
+          <a href="/products/vector" class="menu-link-reveal"> ⤷ Vector</a>
+          <a href="/about" class="menu-link-reveal">About</a>
+          <a href="/contact" class="menu-link-reveal">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script>
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuOpenButton = document.querySelector('.navbar-menu-button');
+    const menuCloseButton = document.getElementById('menuCloseButton');
+
+    menuOpenButton.addEventListener('click', () => menuOverlay.classList.add('open'));
+    menuCloseButton.addEventListener('click', () => menuOverlay.classList.remove('open'));
+  </script>
 </body>
 
 </html>
