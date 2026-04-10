@@ -37,20 +37,24 @@
           <span>/</span>
           <a href="/products">Products</a>
           <span>/</span>
-          Vector
+          <a href="/products/vector/">Vector</a>
         </p>
         <p class="vector-hero-tagline">
-          Portfolio analytics built to deliver clarity, direction, and actionable insight.
+          Clarity, Direction and Actionable Insight For Everyone.
         </p>
         <div class="vector-hero-image">
-          <img
-            src="../../assets/product/vector/dashboard.png"
-            alt="Vector Dashboard"
+          <!-- dashboard.png reserved for later -->
+          <video
             class="vector-dashboard-img"
-          >
+            src="../../assets/video/1vector_demo.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
         </div>
         <div class="vector-hero-actions">
-          <a href="#access" class="btn-primary">Get Access →</a>
+          <a href="#access" class="btn-primary">Download Now →</a>
           <a href="#overview" class="btn-ghost">Learn More</a>
           <span class="version-chip">v0.4.0</span>
         </div>
@@ -86,36 +90,54 @@
       </div>
     </section>
 
-    <!-- Vector Lens -->
+    <!-- Lens Preview -->
     <section class="product-section dark" id="vector-lens">
       <div class="product-section-inner">
         <p class="section-label light">Vector Lens</p>
-        <h2>The analytical engine at the core of Vector.</h2>
+        <h2>An analytical engine built to turn data into direction.</h2>
         <p>
-          Vector Lens processes thousands of data points across a personalized portfolio
-          to generate clarity, provide direction, and support smarter decision-making.
-          It turns complex portfolio conditions into understandable outputs.
+          Vector Lens processes thousands of data points across your portfolio
+          and surfaces what matters — not raw figures, but structured insight
+          you can act on.
         </p>
+
+        <div class="lens-screenshot-wrap">
+          <img src="/assets/product/vector/lens_preview.png" alt="Vector Lens page" />
+        </div>
 
         <div class="lens-output-list">
           <div class="lens-output-item">
-            <h3>01 — Lens Brief</h3>
-            <p>A short three-sentence summary of the most important portfolio insight.</p>
+            <span class="lens-num">01</span>
+            <h3>Lens Brief</h3>
+            <p>Three sentences. The single most important thing happening in your portfolio, right now.</p>
+            <hr class="lens-divider">
             <ul>
-              <li><strong>Current State:</strong> Portfolio trend, slope, volatility, and direction</li>
-              <li><strong>Context:</strong> Supporting data — dividends, EPS, and event inputs</li>
-              <li><strong>Projection:</strong> A practical suggested direction based on mathematical analysis</li>
+              <li><strong>Current state</strong> — trend, slope, volatility, and direction</li>
+              <li><strong>Context</strong> — dividends, EPS, and event inputs</li>
+              <li><strong>Projection</strong> — a concrete next step, grounded in math</li>
             </ul>
           </div>
-
           <div class="lens-output-item">
-            <h3>02 — Projection List</h3>
-            <p>A full list of generated portfolio projections, internally referred to as Lens Projections.</p>
+            <span class="lens-num">02</span>
+            <h3>Lens Projections</h3>
+            <p>A ranked set of portfolio adjustments, each derived from the full Lens analysis. Specific. Quantified. Actionable.</p>
+            <hr class="lens-divider">
+            <ul>
+              <li>Generated from real portfolio conditions</li>
+              <li>Tied directly to your positions and gaps</li>
+              <li>Updated as your portfolio evolves</li>
+            </ul>
           </div>
-
           <div class="lens-output-item">
-            <h3>03 — Mathematical Analysis</h3>
-            <p>Two Monte Carlo simulations — the current portfolio, and the portfolio with projections applied — to show projected risk reduction and distribution tightening visually.</p>
+            <span class="lens-num">03</span>
+            <h3>Mathematical Analysis</h3>
+            <p>Two Monte Carlo simulations — your portfolio as-is, and with projections applied — rendered side by side to show the math behind every suggestion.</p>
+            <hr class="lens-divider">
+            <ul>
+              <li>Visualize distribution tightening</li>
+              <li>See projected risk reduction clearly</li>
+              <li>Every output backed by simulation</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -178,31 +200,67 @@
       </div>
     </section>
 
-    <!-- Access model -->
     <section class="product-section" id="access">
       <div class="product-section-inner">
         <p class="section-label">Access</p>
-        <h2>Take Control of Your Investments.</h2>
+        <h2>Built for investors who want answers,<br>not more dashboards.</h2>
+        <p>Vector is free to start. Unlock the full analytical engine with a subscription — less than a single trade commission per year.</p>
 
         <div class="access-grid">
           <div class="access-card">
-            <h3>Free</h3>
-            <p>Basic data and dashboard access.</p>
+            <div class="access-tier">Free</div>
+            <div class="access-price">$0 <span>/ forever</span></div>
+            <p>Core portfolio tracking and dashboard. See your positions, equity, and diversification at a glance.</p>
+            <hr class="access-divider">
+            <ul class="access-features">
+              <li>Dashboard &amp; positions list</li>
+              <li>Total equity &amp; diversification charts</li>
+              <li>Dividend calendar</li>
+              <li>Market beta</li>
+            </ul>
+            <a href="/download" class="btn-ghost" style="margin-top:auto">Download free</a>
           </div>
-          <div class="access-card">
-            <h3>Paid</h3>
-            <p>Full Vector Lens functionality and advanced analytical outputs.</p>
+
+          <div class="access-card featured">
+            <span class="access-badge">RECOMMENDED</span>
+            <div class="access-tier paid">Lens — Full Access</div>
+            <div class="access-price">$50 <span>/ year</span></div>
+            <p>The complete Vector Lens engine. Projections, Monte Carlo analysis, and the Lens Brief — updated every session.</p>
+            <hr class="access-divider">
+            <ul class="access-features">
+              <li>Everything in Free</li>
+              <li>Lens Brief — 3-sentence portfolio insight</li>
+              <li>Full Lens Projections list</li>
+              <li>Monte Carlo simulations (2 per run)</li>
+              <li>Diversification comparison charts</li>
+            </ul>
+            <a href="https://buy.stripe.com/YOUR_LINK" class="btn-primary" style="margin-top:auto">Get Lens — $50/yr &rarr;</a>
           </div>
         </div>
 
         <div>
-          <p class="section-label" style="margin-bottom: 1.25rem;">How it works</p>
-          <ol class="flow-list">
-            <li>Visit protonyxfin.com</li>
-            <li>Purchase a subscription</li>
-            <li>Download the app</li>
-            <li>Log in and access full features</li>
-          </ol>
+          <p class="section-label" style="margin-bottom:1.25rem">How it works</p>
+          <div class="flow-stepper">
+            <div class="flow-step">
+              <div class="flow-step-num">01</div>
+              <div class="flow-step-lbl">Visit protonyxfin.com</div>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step">
+              <div class="flow-step-num">02</div>
+              <div class="flow-step-lbl">Purchase subscription</div>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step">
+              <div class="flow-step-num">03</div>
+              <div class="flow-step-lbl">Download the app</div>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step">
+              <div class="flow-step-num">04</div>
+              <div class="flow-step-lbl">Log in &amp; unlock Lens</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -230,7 +288,7 @@
         <p>Clarity through data.</p>
         <p>Answers, not dashboards.</p>
         <div style="margin-top: 1rem;">
-          <a href="#access" class="btn-primary">Get Access →</a>
+          <a href="#access" class="btn-primary">Download Now →</a>
         </div>
       </div>
     </section>
