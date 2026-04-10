@@ -21,39 +21,43 @@ if (heroVideoElement) {
 }
 
 const navbarLogo = document.getElementById("navbarLogo");
-const whiteLogo = "assets/company/protonyx_full_white.png";
-const blackLogo = "assets/company/protonyx_full_black.png";
+const whiteLogo = "/assets/company/protonyx_full_white.png";
+const blackLogo = "/assets/company/protonyx_full_black.png";
 
-let currentLogo = "white";
+let currentLogo = null;
 
 if (navbarLogo) {
   new Image().src = whiteLogo;
   new Image().src = blackLogo;
 
-  window.addEventListener("scroll", () => {
-    const heroSection = document.querySelector(".hero");
-    if (!heroSection) return;
+  const darkHeroSection = document.querySelector(".hero, .vector-hero, .products-hero");
 
-    const heroHeight = heroSection.offsetHeight;
-    const shouldBeWhite = window.scrollY < heroHeight - 80;
+  function shouldLogoBeWhite() {
+    if (!darkHeroSection) return false;
+    return window.scrollY < darkHeroSection.offsetHeight - 80;
+  }
 
-    if (shouldBeWhite && currentLogo === "white") return;
-    if (!shouldBeWhite && currentLogo === "black") return;
+  function setLogo(isWhite, animate) {
+    const target = isWhite ? "white" : "black";
+    if (target === currentLogo) return;
 
-    navbarLogo.style.opacity = 0;
+    if (animate) {
+      navbarLogo.style.opacity = 0;
+      setTimeout(() => {
+        navbarLogo.src = isWhite ? whiteLogo : blackLogo;
+        currentLogo = target;
+        navbarLogo.style.opacity = 1;
+      }, 200);
+    } else {
+      navbarLogo.src = isWhite ? whiteLogo : blackLogo;
+      currentLogo = target;
+    }
+  }
 
-    setTimeout(() => {
-      if (shouldBeWhite) {
-        navbarLogo.src = whiteLogo;
-        currentLogo = "white";
-      } else {
-        navbarLogo.src = blackLogo;
-        currentLogo = "black";
-      }
+  // Set immediately on load (no animation)
+  setLogo(shouldLogoBeWhite(), false);
 
-      navbarLogo.style.opacity = 1;
-    }, 200);
-  });
+  window.addEventListener("scroll", () => setLogo(shouldLogoBeWhite(), true));
 }
 
 const menuButton = document.querySelector(".navbar-menu-button");

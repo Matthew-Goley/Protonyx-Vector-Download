@@ -203,18 +203,6 @@
       </div>
     </section>
 
-    <!-- Disclaimer -->
-    <section class="product-section surface" id="disclaimer">
-      <div class="product-section-inner">
-        <div class="disclaimer-block">
-          <p>
-            Protonyx is not a financial advisor. All outputs in Vector are framed as
-            mathematical analysis and projections, not investment advice.
-          </p>
-        </div>
-      </div>
-    </section>
-
     <!-- Future -->
     <section class="product-section" id="future">
       <div class="product-section-inner">
@@ -267,23 +255,18 @@
   </div>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Protonyx LLC. All rights reserved.</p>
-
-    <nav class="footer-links">
-      <a href="#">Terms of Service</a>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Contact</a>
-    </nav>
+    <div class="footer-top">
+      <p>&copy; 2026 Protonyx LLC. All rights reserved.</p>
+      <nav class="footer-links">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+    <p class="footer-disclaimer">Protonyx is not a financial advisor. All outputs in Vector are framed as mathematical analysis and projections, not investment advice.</p>
   </footer>
 
-  <script>
-    const menuOverlay = document.getElementById('menuOverlay');
-    const menuOpenButton = document.querySelector('.navbar-menu-button');
-    const menuCloseButton = document.getElementById('menuCloseButton');
-
-    menuOpenButton.addEventListener('click', () => menuOverlay.classList.add('open'));
-    menuCloseButton.addEventListener('click', () => menuOverlay.classList.remove('open'));
-  </script>
+  <script src="../../script.js"></script>
 </body>
 
 </html>
