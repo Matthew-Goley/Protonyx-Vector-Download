@@ -1,3 +1,6 @@
+// ─────────────────────────────────────────────
+//  Hero Video Rotation  (landing page)
+// ─────────────────────────────────────────────
 const heroVideoSources = [
   "assets/video/1vector_demo.mp4",
   "assets/video/2city.mp4",
@@ -7,19 +10,20 @@ const heroVideoSources = [
 ];
 
 let currentHeroVideoIndex = 0;
-
 const heroVideoElement = document.getElementById("heroVideo");
 
 if (heroVideoElement) {
   setInterval(() => {
-    currentHeroVideoIndex =
-      (currentHeroVideoIndex + 1) % heroVideoSources.length;
-
+    currentHeroVideoIndex = (currentHeroVideoIndex + 1) % heroVideoSources.length;
     heroVideoElement.src = heroVideoSources[currentHeroVideoIndex];
     heroVideoElement.play();
   }, 4000);
 }
 
+
+// ─────────────────────────────────────────────
+//  Navbar Logo  (all pages)
+// ─────────────────────────────────────────────
 const navbarLogo = document.getElementById("navbarLogo");
 const whiteLogo = "/assets/company/protonyx_full_white.png";
 const blackLogo = "/assets/company/protonyx_full_black.png";
@@ -54,16 +58,37 @@ if (navbarLogo) {
     }
   }
 
-  // Set immediately on load (no animation)
   setLogo(shouldLogoBeWhite(), false);
-
   window.addEventListener("scroll", () => setLogo(shouldLogoBeWhite(), true));
 }
 
+
+// ─────────────────────────────────────────────
+//  Product Card Video Preview  (home + products pages)
+// ─────────────────────────────────────────────
+const vectorCard = document.querySelector(".vector-card");
+
+if (vectorCard) {
+  const vectorVideo = vectorCard.querySelector(".preview-video");
+
+  vectorCard.addEventListener("mouseenter", () => {
+    vectorVideo.currentTime = 0;
+    vectorVideo.play();
+  });
+
+  vectorCard.addEventListener("mouseleave", () => {
+    vectorVideo.pause();
+    vectorVideo.currentTime = 0;
+  });
+}
+
+
+// ─────────────────────────────────────────────
+//  Menu Overlay  (all pages)
+// ─────────────────────────────────────────────
 const menuButton = document.querySelector(".navbar-menu-button");
 const menuOverlay = document.getElementById("menuOverlay");
 const menuCloseButton = document.getElementById("menuCloseButton");
-
 const navbar = document.querySelector(".navbar");
 
 function openMenu() {
@@ -84,7 +109,7 @@ if (menuButton && menuOverlay && menuCloseButton) {
   menuButton.addEventListener("click", openMenu);
   menuCloseButton.addEventListener("click", closeMenu);
 
-  menuOverlay.addEventListener("click", (event) => {
-    if (event.target === menuOverlay) closeMenu();
+  menuOverlay.addEventListener("click", (e) => {
+    if (e.target === menuOverlay) closeMenu();
   });
 }

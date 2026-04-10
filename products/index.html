@@ -110,19 +110,5 @@
   </footer>
 
   <script src="../script.js"></script>
-  <script>
-    const vectorCard = document.querySelector('.vector-card');
-    const vectorVideo = vectorCard.querySelector('.preview-video');
-
-    vectorCard.addEventListener('mouseenter', () => {
-      vectorVideo.currentTime = 0;
-      vectorVideo.play();
-    });
-
-    vectorCard.addEventListener('mouseleave', () => {
-      vectorVideo.pause();
-      vectorVideo.currentTime = 0;
-    });
-  </script>
 </body>
 </html>
