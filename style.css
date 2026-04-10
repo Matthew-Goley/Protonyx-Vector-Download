@@ -67,6 +67,11 @@ p {
   z-index: 1000;
 }
 
+.navbar-logo a {
+  display: block;
+  line-height: 0;
+}
+
 .navbar-logo img {
   display: block;
   height: 40px;
@@ -546,6 +551,26 @@ p {
   gap: 2rem;
 }
 
+.vector-hero-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+}
+
+.vector-hero-image {
+  width: 100%;
+}
+
+.vector-dashboard-img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
 .vector-eyebrow {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
@@ -908,6 +933,7 @@ p {
   .feature-grid { grid-template-columns: 1fr; }
   .access-grid { grid-template-columns: 1fr; }
   .vector-hero-logo { height: 40px; }
+  .vector-hero-top { flex-direction: column; gap: 1rem; }
 }
 
 .site-footer {
