@@ -554,15 +554,22 @@ p {
   overflow: hidden;
 }
 
+@keyframes heroPulse {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(1.18); opacity: 0.65; }
+}
+
 .vector-hero::before {
   content: "";
   position: absolute;
   top: -10%;
-  right: -5%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(45, 212, 191, 0.12) 0%, rgba(56, 189, 248, 0.06) 50%, transparent 70%);
+  left: 50%;
+  margin-left: -900px;
+  width: 1800px;
+  height: 1800px;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.13) 0%, rgba(56, 189, 248, 0.08) 40%, transparent 70%);
   pointer-events: none;
+  animation: heroPulse 10s ease-in-out infinite;
 }
 
 .vector-hero-inner {
