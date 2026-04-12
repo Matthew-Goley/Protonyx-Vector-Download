@@ -492,11 +492,10 @@ p {
 /* ── Products page hero ── */
 .products-hero {
   width: 100%;
-  min-height: 40vh;
   background: #0c0f16;
   display: flex;
   align-items: flex-end;
-  padding: 0 6% 4rem;
+  padding: 8rem 6% 3rem;
 }
 
 .products-hero-inner {
