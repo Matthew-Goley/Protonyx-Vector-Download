@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
+  <title>Sign in | Protonyx</title>
+</head>
+<body class="auth-body">
+
+  <main class="auth-card" role="main">
+    <div class="auth-logo-wrap">
+      <a href="../index.html" aria-label="Protonyx home">
+        <img src="../assets/company/protonyx_full_white.png" alt="Protonyx logo">
+      </a>
+    </div>
+
+    <div class="auth-tabs" role="tablist">
+      <button type="button" class="auth-tab active" id="tabLogin" role="tab" aria-selected="true">Sign in</button>
+      <button type="button" class="auth-tab" id="tabSignup" role="tab" aria-selected="false">Create account</button>
+    </div>
+
+    <form class="auth-form active" id="loginForm" autocomplete="on" novalidate>
+      <div class="auth-field">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" name="username" autocomplete="username" required>
+      </div>
+      <div class="auth-field">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" name="password" autocomplete="current-password" required>
+      </div>
+      <p class="auth-message" id="loginMessage" aria-live="polite"></p>
+      <button type="submit" class="auth-submit">Sign in</button>
+    </form>
+
+    <form class="auth-form" id="signupForm" autocomplete="on" novalidate>
+      <div class="auth-field">
+        <label for="signupUsername">Username</label>
+        <input type="text" id="signupUsername" name="username" autocomplete="username" required>
+      </div>
+      <div class="auth-field">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" name="password" autocomplete="new-password" required>
+      </div>
+      <p class="auth-message" id="signupMessage" aria-live="polite"></p>
+      <button type="submit" class="auth-submit">Create account</button>
+    </form>
+
+    <p class="auth-footer-link">
+      <a href="../index.html">← Back to Home Page</a>
+    </p>
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    const tabLogin = document.getElementById("tabLogin");
+    const tabSignup = document.getElementById("tabSignup");
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+
+    function switchToLoginTab() {
+      tabLogin.classList.add("active");
+      tabLogin.setAttribute("aria-selected", "true");
+      tabSignup.classList.remove("active");
+      tabSignup.setAttribute("aria-selected", "false");
+      loginForm.classList.add("active");
+      signupForm.classList.remove("active");
+    }
+
+    function switchToSignupTab() {
+      tabSignup.classList.add("active");
+      tabSignup.setAttribute("aria-selected", "true");
+      tabLogin.classList.remove("active");
+      tabLogin.setAttribute("aria-selected", "false");
+      signupForm.classList.add("active");
+      loginForm.classList.remove("active");
+    }
+
+    tabLogin.addEventListener("click", switchToLoginTab);
+    tabSignup.addEventListener("click", switchToSignupTab);
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      login();
+    });
+
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      signup();
+    });
+
+    checkAuth();
+  </script>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../style.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
-  <title>Careers | Protonyx</title>
+  <title>Account | Protonyx</title>
 </head>
 <body>
 
@@ -19,6 +19,7 @@
         >
       </a>
     </div>
+
     <div class="navbar-actions">
       <a href="/account/index.html" class="navbar-profile-icon" aria-label="Account">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -34,15 +35,46 @@
     </div>
   </nav>
 
-  <section class="products-hero">
-    <div class="products-hero-inner">
-      <p class="products-label">Careers</p>
-    </div>
-  </section>
+  <main>
+    <section class="account-hero">
+      <div class="account-hero-inner">
+        <p class="account-hero-eyebrow">Account</p>
+        <h1 class="account-hero-username" id="accountUsername">—</h1>
+      </div>
+    </section>
 
-  <section class="intro-section">
-    <div class="section-shell" style="min-height: 40vh;"></div>
-  </section>
+    <section class="account-section">
+      <div class="account-section-inner">
+        <p class="section-label">Profile</p>
+
+        <div class="account-info-grid">
+          <div class="account-info-card">
+            <span class="account-info-label">Username</span>
+            <span class="account-info-value" id="infoUsername">—</span>
+          </div>
+          <div class="account-info-card">
+            <span class="account-info-label">Email</span>
+            <!-- TODO: replace with response.email from GET /me -->
+            <span class="account-info-value placeholder" id="infoEmail">Loaded from GET /me</span>
+          </div>
+          <div class="account-info-card">
+            <span class="account-info-label">Plan</span>
+            <!-- TODO: replace with response.plan from GET /me -->
+            <span class="account-info-value placeholder" id="infoPlan">Loaded from GET /me</span>
+          </div>
+          <div class="account-info-card">
+            <span class="account-info-label">Member since</span>
+            <!-- TODO: replace with response.created_at from GET /me -->
+            <span class="account-info-value placeholder" id="infoCreated">Loaded from GET /me</span>
+          </div>
+        </div>
+
+        <div class="account-actions">
+          <button type="button" class="btn-grad" id="logoutButton" data-logout>Log out</button>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-overlay-inner">
@@ -82,6 +114,22 @@
 
   <script src="../script.js"></script>
   <script src="../auth/auth.js"></script>
-  <script>checkAuth();</script>
+  <script>
+    (function () {
+      if (!localStorage.getItem("token")) {
+        window.location.href = "/auth/index.html";
+        return;
+      }
+
+      const storedUsername = localStorage.getItem("username") || "User";
+      document.getElementById("accountUsername").textContent = storedUsername;
+      document.getElementById("infoUsername").textContent = storedUsername;
+
+      // TODO: replace block below with GET ${API_URL}/me using Bearer token
+      // and populate email, plan, member-since fields from the response.
+
+      checkAuth();
+    })();
+  </script>
 </body>
 </html>
