@@ -111,10 +111,7 @@ function logout() {
 function checkAuth() {
   const token = getToken();
   const loggedIn = Boolean(token);
-
-  document.querySelectorAll(".navbar-profile-icon").forEach((el) => {
-    el.classList.toggle("visible", loggedIn);
-  });
+  const username = localStorage.getItem("username") || "";
 
   document.querySelectorAll(".auth-only").forEach((el) => {
     el.classList.toggle("visible", loggedIn);
@@ -122,6 +119,10 @@ function checkAuth() {
 
   document.querySelectorAll(".guest-only").forEach((el) => {
     el.classList.toggle("visible", !loggedIn);
+  });
+
+  document.querySelectorAll("[data-username]").forEach((el) => {
+    el.textContent = username || "User";
   });
 
   document.querySelectorAll("[data-logout]").forEach((el) => {
@@ -134,3 +135,15 @@ function checkAuth() {
     }
   });
 }
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", checkAuth);
+} else {
+  checkAuth();
+}
+
+window.addEventListener("storage", (e) => {
+  if (e.key === "token" || e.key === "username" || e.key === null) {
+    checkAuth();
+  }
+});

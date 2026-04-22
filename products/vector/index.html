@@ -21,7 +21,8 @@
     </div>
 
     <div class="navbar-actions">
-      <a href="/account/index.html" class="navbar-profile-icon" aria-label="Account">
+      <a href="/auth/index.html" class="navbar-signup-link guest-only">Create Account</a>
+      <a href="/account/index.html" class="navbar-profile-icon auth-only" aria-label="Account">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="8" r="4"></circle>
           <path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path>
@@ -321,6 +322,11 @@
           <a href="/products/vector" class="menu-link-reveal"> ⤷ Vector</a>
           <a href="/about" class="menu-link-reveal">About</a>
           <a href="/contact" class="menu-link-reveal">Contact</a>
+        </div>
+
+        <div class="menu-column">
+          <p class="menu-label">Account</p>
+          <a href="/auth/index.html" class="menu-link-reveal guest-only">Create Account</a>
           <a href="/auth/index.html" class="menu-link-reveal guest-only">Login</a>
           <a href="/account/index.html" class="menu-link-reveal auth-only">Profile</a>
           <button type="button" class="menu-link-reveal menu-logout-button auth-only" data-logout>Logout</button>
