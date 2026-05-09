@@ -1,0 +1,360 @@
+/* ──────────────────────────────────────────────
+   chrome.css — site shell that appears on every
+   non-auth page: floating navbar, full-screen
+   menu overlay, footer, and the auth-state
+   toggles that show/hide nav links based on
+   whether a token is in localStorage.
+   ────────────────────────────────────────────── */
+
+/* ── Navbar ── */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar-logo a {
+  display: block;
+  line-height: 0;
+}
+
+.navbar-logo img {
+  display: block;
+  height: 40px;
+  width: auto;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-menu-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background-color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.navbar-menu-button span {
+  width: 20px;
+  height: 2px;
+  background-color: black;
+  border-radius: 2px;
+}
+
+/* ── Navbar profile icon + auth-aware menu links ── */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  padding: 0;
+  background: white;
+  color: black;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navbar-profile-icon:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.navbar-profile-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.navbar-profile-icon.visible {
+  display: inline-flex;
+}
+
+.navbar-signup-link {
+  display: none;
+  padding: 0 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+}
+
+.navbar-signup-link:hover {
+  color: white;
+}
+
+.navbar-signup-link.visible {
+  display: inline-block;
+}
+
+/* ── Menu overlay ── */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: #0c0f16;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.menu-overlay-inner {
+  width: 90%;
+  max-width: 1100px;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  margin-bottom: 4rem;
+}
+
+.menu-overlay-brand img {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
+.menu-close-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: white;
+  color: black;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu-overlay-content {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 4rem;
+}
+
+.menu-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-self: stretch;
+}
+
+.menu-label {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.9rem;
+  width: 100%;
+
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.menu-column a {
+  color: white;
+  text-decoration: none;
+  font-size: clamp(1.6rem, 3vw, 3rem);
+  line-height: 1.05;
+  transition: opacity 0.2s ease;
+}
+
+.menu-column a:hover {
+  opacity: 0.72;
+}
+
+.menu-link-reveal {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  font-size: clamp(1.6rem, 3vw, 3rem);
+  line-height: 1.05;
+
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transform: translateY(8px);
+
+  transition:
+    clip-path 0.5s ease,
+    opacity 0.35s ease,
+    transform 0.5s ease;
+}
+
+.menu-overlay.open .menu-link-reveal {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+
+.menu-column .menu-link-reveal:nth-of-type(1) { transition-delay: 0.08s; }
+.menu-column .menu-link-reveal:nth-of-type(2) { transition-delay: 0.14s; }
+.menu-column .menu-link-reveal:nth-of-type(3) { transition-delay: 0.20s; }
+.menu-column .menu-link-reveal:nth-of-type(4) { transition-delay: 0.26s; }
+.menu-column .menu-link-reveal:nth-of-type(5) { transition-delay: 0.32s; }
+.menu-column .menu-link-reveal:nth-of-type(6) { transition-delay: 0.38s; }
+.menu-column .menu-link-reveal:nth-of-type(7) { transition-delay: 0.44s; }
+.menu-column .menu-link-reveal:nth-of-type(8) { transition-delay: 0.50s; }
+
+.menu-auth-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  opacity: 0.35;
+  width: 100%;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.menu-link-reveal.auth-only,
+.menu-link-reveal.guest-only {
+  display: none;
+}
+
+.menu-link-reveal.auth-only.visible,
+.menu-link-reveal.guest-only.visible {
+  display: inline-block;
+}
+
+.menu-column .menu-logout-button {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.05;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: color 0.2s ease, opacity 0.35s ease, transform 0.5s ease;
+}
+
+.menu-column .menu-logout-button.visible {
+  display: inline-block;
+  /* Pin to the bottom-left of the column. Pairs with .menu-column { align-self: stretch } */
+  margin-top: auto;
+  align-self: flex-start;
+  padding-bottom: 1.5rem;
+}
+
+.menu-overlay.open .menu-logout-button.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-column .menu-logout-button:hover {
+  color: rgba(255, 255, 255, 0.9);
+  opacity: 1;
+}
+
+/* ── Footer ── */
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2rem 6%;
+  background: var(--bg-base);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: #4a4a4a;
+  font-size: 0.85rem;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.footer-disclaimer {
+  text-align: center;
+  color: #4a4a4a;
+  opacity: 0.7;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  color: #4a4a4a;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .menu-overlay-content {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}

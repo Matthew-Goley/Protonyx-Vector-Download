@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <title>Verify email | Protonyx</title>
+  <style>
+    .verify-card {
+      width: 100%;
+      max-width: 460px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .verify-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .verify-icon {
+      font-size: 2.5rem;
+      line-height: 1;
+      color: #2dd4bf;
+    }
+
+    .verify-icon.error {
+      color: #ff7a7a;
+    }
+
+    .verify-title {
+      margin: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #e7ebf3;
+      letter-spacing: 0.02em;
+    }
+
+    .verify-subtitle {
+      margin: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .verify-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      background: var(--grad);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .verify-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(42, 107, 154, 0.35);
+    }
+
+    .verify-link.muted {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="auth-body">
+
+  <main class="verify-card" role="main">
+    <a href="../index.html" aria-label="Protonyx home">
+      <img src="../assets/company/protonyx_full_white.png" alt="Protonyx logo" class="verify-logo">
+    </a>
+
+    <div id="verifyState">
+      <p class="verify-subtitle" id="verifyMessage">Verifying your email...</p>
+    </div>
+  </main>
+
+  <script src="../auth/auth.js"></script>
+  <script>
+    (async function () {
+      const stateEl = document.getElementById("verifyState");
+
+      function renderLoading() {
+        stateEl.innerHTML = `
+          <p class="verify-subtitle">Verifying your email...</p>
+        `;
+      }
+
+      function renderSuccess() {
+        stateEl.innerHTML = `
+          <div class="verify-icon">&#10003;</div>
+          <h1 class="verify-title">Email verified.</h1>
+          <p class="verify-subtitle">You can now close this page and log in.</p>
+          <a class="verify-link" href="/auth/index.html">Go to sign in</a>
+        `;
+      }
+
+      function renderError(message) {
+        stateEl.innerHTML = `
+          <div class="verify-icon error">&#33;</div>
+          <h1 class="verify-title">Verification failed.</h1>
+          <p class="verify-subtitle">${message}</p>
+          <a class="verify-link muted" href="/auth/index.html">Back to sign in</a>
+        `;
+      }
+
+      renderLoading();
+
+      const token = new URLSearchParams(window.location.search).get("token");
+      if (!token) {
+        renderError("Missing verification token in the link.");
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/verify-email?token=${encodeURIComponent(token)}`);
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok || !data.success) {
+          const msg = (data && (data.message || data.error)) || "Invalid or expired verification token.";
+          renderError(msg);
+          return;
+        }
+
+        renderSuccess();
+      } catch (err) {
+        renderError("Unable to reach the verification server. Please try again.");
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -6,6 +6,17 @@
   <link rel="stylesheet" href="../style.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
   <title>Account | Protonyx</title>
+  <style>
+    /* Gradient treatment for the plan field when the user is on Pro.
+       Applied by the script below based on the plan value from GET /me. */
+    .plan-pro {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
 
@@ -36,46 +47,48 @@
     </div>
   </nav>
 
-  <main>
-    <section class="account-hero">
-      <div class="account-hero-inner">
-        <p class="account-hero-eyebrow">Account</p>
-        <h1 class="account-hero-username" id="accountUsername">—</h1>
+  <section class="products-hero">
+    <div class="products-hero-inner">
+      <p class="products-label" id="accountHeroTitle">Account</p>
+      <p id="accountHeroSubtitle" style="font-size: 13px; color: var(--text-muted); margin: 0;">Account</p>
+    </div>
+  </section>
+
+  <section class="account-section">
+    <div class="account-section-inner">
+      <p class="section-label">Profile</p>
+
+      <dl class="account-info-list">
+        <!-- Source: GET /me -> user.username -->
+        <dt>Username</dt>
+        <dd id="infoUsername">—</dd>
+
+        <!-- Source: GET /me -> user.email -->
+        <dt>Email</dt>
+        <dd id="infoEmail">—</dd>
+
+        <!-- Source: GET /me -> user.plan (styled with --grad when 'pro') -->
+        <dt>Plan</dt>
+        <dd id="infoPlan">—</dd>
+
+        <!-- Source: GET /me -> user.member_since (formatted) -->
+        <dt>Member since</dt>
+        <dd id="infoMemberSince">—</dd>
+
+        <!-- Source: GET /me -> user.beta_access -->
+        <dt>Beta access</dt>
+        <dd id="infoBetaAccess">—</dd>
+
+        <!-- Source: GET /me -> user.download_count -->
+        <dt>Downloads</dt>
+        <dd id="infoDownloadCount">—</dd>
+      </dl>
+
+      <div class="account-logout-row">
+        <button type="button" class="btn-outline-gray" data-logout>Logout</button>
       </div>
-    </section>
-
-    <section class="account-section">
-      <div class="account-section-inner">
-        <p class="section-label">Profile</p>
-
-        <div class="account-info-grid">
-          <div class="account-info-card">
-            <span class="account-info-label">Username</span>
-            <span class="account-info-value" id="infoUsername">—</span>
-          </div>
-          <div class="account-info-card">
-            <span class="account-info-label">Email</span>
-            <!-- TODO: replace with response.email from GET /me -->
-            <span class="account-info-value placeholder" id="infoEmail">Loaded from GET /me</span>
-          </div>
-          <div class="account-info-card">
-            <span class="account-info-label">Plan</span>
-            <!-- TODO: replace with response.plan from GET /me -->
-            <span class="account-info-value placeholder" id="infoPlan">Loaded from GET /me</span>
-          </div>
-          <div class="account-info-card">
-            <span class="account-info-label">Member since</span>
-            <!-- TODO: replace with response.created_at from GET /me -->
-            <span class="account-info-value placeholder" id="infoCreated">Loaded from GET /me</span>
-          </div>
-        </div>
-
-        <div class="account-actions">
-          <button type="button" class="btn-grad" id="logoutButton" data-logout>Log out</button>
-        </div>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-overlay-inner">
@@ -94,6 +107,7 @@
           <a href="/careers" class="menu-link-reveal">Careers</a>
           <a href="/about" class="menu-link-reveal">About</a>
           <a href="/contact" class="menu-link-reveal">Contact</a>
+          <button type="button" class="menu-logout-button auth-only" data-logout>Logout</button>
         </div>
 
         <div class="menu-column">
@@ -101,7 +115,6 @@
           <a href="/auth/index.html" class="menu-link-reveal guest-only">Create Account</a>
           <a href="/auth/index.html" class="menu-link-reveal guest-only">Login</a>
           <a href="/account/index.html" class="menu-link-reveal auth-only">Profile</a>
-          <button type="button" class="menu-link-reveal menu-logout-button auth-only" data-logout>Logout</button>
         </div>
       </div>
     </div>
@@ -127,12 +140,56 @@
         return;
       }
 
-      const storedUsername = localStorage.getItem("username") || "User";
-      document.getElementById("accountUsername").textContent = storedUsername;
-      document.getElementById("infoUsername").textContent = storedUsername;
+      const heroTitleEl = document.getElementById("accountHeroTitle");
+      if (heroTitleEl) {
+        heroTitleEl.textContent = localStorage.getItem("username") || "Account";
+      }
 
-      // TODO: replace block below with GET ${API_URL}/me using Bearer token
-      // and populate email, plan, member-since fields from the response.
+      function formatMemberSince(value) {
+        if (!value) return "—";
+        const d = new Date(value);
+        if (isNaN(d.getTime())) return "—";
+        return d.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+
+      function render(profile) {
+        // Source: GET /me (with localStorage as fallback for initial paint)
+        const username = (profile && profile.username) || localStorage.getItem("username") || "User";
+        const email = (profile && profile.email) || localStorage.getItem("email") || "—";
+        const plan = (profile && profile.plan) || localStorage.getItem("plan") || "free";
+        const memberSince = (profile && profile.member_since) || localStorage.getItem("member_since") || "";
+        const betaAccess = profile
+          ? Boolean(profile.beta_access)
+          : localStorage.getItem("beta_access") === "true";
+        const downloadCount = profile
+          ? Number(profile.download_count ?? 0)
+          : Number(localStorage.getItem("download_count") || 0);
+
+        document.getElementById("infoUsername").textContent = username;
+        document.getElementById("infoEmail").textContent = email;
+
+        const planEl = document.getElementById("infoPlan");
+        planEl.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+        planEl.classList.toggle("plan-pro", plan.toLowerCase() === "pro");
+
+        document.getElementById("infoMemberSince").textContent = formatMemberSince(memberSince);
+        document.getElementById("infoBetaAccess").textContent = betaAccess ? "Enabled" : "Not enabled";
+        document.getElementById("infoDownloadCount").textContent = String(downloadCount);
+      }
+
+      // Initial paint from cached localStorage values…
+      render(null);
+
+      // …then refresh from GET /me and re-render with the authoritative profile.
+      if (typeof loadProfile === "function") {
+        loadProfile().then((profile) => {
+          if (profile) render(profile);
+        });
+      }
 
       checkAuth();
     })();
