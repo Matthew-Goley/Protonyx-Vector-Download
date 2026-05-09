@@ -1,0 +1,158 @@
+/* ──────────────────────────────────────────────
+   base.css — resets, design tokens, typography,
+   and reusable button primitives shared across
+   every page.
+   ────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-base: #f2f1ee;
+  --bg-surface: #d7d4d4;
+  --border: rgb(142, 142, 142);
+  --text-primary: #1f2230;
+  --grad: linear-gradient(135deg, #3a8c6e, #2a6b9a);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+h1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-primary);
+}
+
+/* ── Button primitives ── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.9rem 2.2rem;
+
+  background: linear-gradient(135deg, #2dd4bf, #38bdf8, #1e3a8a);
+  color: #fff;
+  text-decoration: none;
+
+  border-radius: 10px;
+
+  font-weight: 600;
+  font-size: 1.05rem;
+
+  width: fit-content;
+  margin: 0 auto;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(30, 58, 138, 0.25);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2.2rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.btn-grad {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.8rem;
+  background: var(--grad);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-grad:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(42, 107, 154, 0.35);
+}
+
+.btn-outline-gray {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.4rem;
+  background: transparent;
+  color: rgba(31, 34, 48, 0.55);
+  border: 1px solid rgba(31, 34, 48, 0.35);
+  border-radius: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-outline-gray:hover {
+  color: rgba(31, 34, 48, 0.85);
+  border-color: rgba(31, 34, 48, 0.55);
+  background-color: rgba(31, 34, 48, 0.04);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+}

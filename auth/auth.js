@@ -25,7 +25,7 @@ async function login() {
   const password = passwordInput ? passwordInput.value : "";
 
   if (!username || !password) {
-    setAuthMessage(messageEl, "Please enter both username and password.", "error");
+    setAuthMessage(messageEl, "Please enter your username or email and password.", "error");
     return;
   }
 
@@ -41,7 +41,7 @@ async function login() {
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      const msg = (data && data.error) || "Invalid username or password.";
+      const msg = (data && (data.message || data.error)) || "Invalid username/email or password.";
       setAuthMessage(messageEl, msg, "error");
       return;
     }
@@ -52,7 +52,11 @@ async function login() {
     }
 
     localStorage.setItem("token", data.token);
+    // The identifier the user typed may be an email; overwrite with the real
+    // username once loadProfile() fetches the profile.
     localStorage.setItem("username", username);
+
+    await loadProfile();
     window.location.href = "../index.html";
   } catch (err) {
     setAuthMessage(messageEl, "Unable to reach server. Please try again.", "error");
@@ -61,14 +65,16 @@ async function login() {
 
 async function signup() {
   const usernameInput = document.getElementById("signupUsername");
+  const emailInput = document.getElementById("signupEmail");
   const passwordInput = document.getElementById("signupPassword");
   const messageEl = document.getElementById("signupMessage");
 
   const username = usernameInput ? usernameInput.value.trim() : "";
+  const email = emailInput ? emailInput.value.trim() : "";
   const password = passwordInput ? passwordInput.value : "";
 
-  if (!username || !password) {
-    setAuthMessage(messageEl, "Please enter both username and password.", "error");
+  if (!username || !email || !password) {
+    setAuthMessage(messageEl, "Please enter a username, email, and password.", "error");
     return;
   }
 
@@ -78,13 +84,13 @@ async function signup() {
     const response = await fetch(`${API_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, email, password }),
     });
 
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      const msg = (data && data.error) || "Unable to create account.";
+      const msg = (data && (data.message || data.error)) || "Unable to create account.";
       setAuthMessage(messageEl, msg, "error");
       return;
     }
@@ -92,6 +98,7 @@ async function signup() {
     setAuthMessage(messageEl, "Account created. Please sign in.", "success");
 
     if (usernameInput) usernameInput.value = "";
+    if (emailInput) emailInput.value = "";
     if (passwordInput) passwordInput.value = "";
 
     if (typeof switchToLoginTab === "function") {
@@ -102,9 +109,41 @@ async function signup() {
   }
 }
 
+// Fetch the current user's profile from GET /me and mirror the key fields into
+// localStorage so pages can render without waiting on a network round-trip.
+async function loadProfile() {
+  const token = getToken();
+  if (!token) return null;
+
+  try {
+    const response = await fetch(`${API_URL}/me`, {
+      headers: { ...authHeaders() },
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data.user) return null;
+
+    const u = data.user;
+    localStorage.setItem("username", u.username || "");
+    localStorage.setItem("email", u.email || "");
+    localStorage.setItem("plan", u.plan || "free");
+    localStorage.setItem("member_since", u.member_since || "");
+    localStorage.setItem("beta_access", u.beta_access ? "true" : "false");
+    localStorage.setItem("download_count", String(u.download_count ?? 0));
+    return u;
+  } catch (err) {
+    return null;
+  }
+}
+
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
+  localStorage.removeItem("email");
+  localStorage.removeItem("plan");
+  localStorage.removeItem("member_since");
+  localStorage.removeItem("beta_access");
+  localStorage.removeItem("download_count");
   window.location.href = "/auth/index.html";
 }
 

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <title>Forgot password | Protonyx</title>
+  <style>
+    .reset-card {
+      width: 100%;
+      max-width: 460px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .reset-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+      margin: 0 auto 0.25rem;
+    }
+
+    .reset-title {
+      margin: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #e7ebf3;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+
+    .reset-subtitle {
+      margin: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.55);
+      text-align: center;
+    }
+
+    .reset-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .reset-back-link {
+      text-align: center;
+      font-size: 0.8rem;
+      font-family: 'IBM Plex Mono', monospace;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .reset-back-link a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+    }
+
+    .reset-back-link a:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body class="auth-body">
+
+  <main class="reset-card" role="main">
+    <a href="../index.html" aria-label="Protonyx home">
+      <img src="../assets/company/protonyx_full_white.png" alt="Protonyx logo" class="reset-logo">
+    </a>
+
+    <h1 class="reset-title">Reset your password</h1>
+    <p class="reset-subtitle">Enter your email address and we will send you a reset link.</p>
+
+    <form class="reset-form" id="forgotForm" autocomplete="on" novalidate>
+      <div class="auth-field">
+        <label for="forgotEmail">Email</label>
+        <input type="email" id="forgotEmail" name="email" autocomplete="email" required>
+      </div>
+      <p class="auth-message" id="forgotMessage" aria-live="polite"></p>
+      <button type="submit" class="auth-submit" id="forgotSubmit">Send reset link</button>
+    </form>
+
+    <p class="reset-back-link">
+      <a href="../auth/index.html">← Back to login</a>
+    </p>
+  </main>
+
+  <script src="../auth/auth.js"></script>
+  <script>
+    const form = document.getElementById("forgotForm");
+    const emailInput = document.getElementById("forgotEmail");
+    const messageEl = document.getElementById("forgotMessage");
+    const submitBtn = document.getElementById("forgotSubmit");
+
+    function setMessage(text, kind) {
+      messageEl.textContent = text || "";
+      messageEl.classList.remove("error", "success");
+      if (kind) messageEl.classList.add(kind);
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        setMessage("Please enter your email address.", "error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      setMessage("Sending reset link…", null);
+
+      try {
+        const response = await fetch(`${API_URL}/forgot-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          const msg = (data && (data.message || data.error)) || "Unable to process request.";
+          setMessage(msg, "error");
+          submitBtn.disabled = false;
+          return;
+        }
+
+        setMessage("If that email is registered, you will receive a reset link shortly.", "success");
+        emailInput.value = "";
+      } catch (err) {
+        setMessage("Unable to reach server. Please try again.", "error");
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../style.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
-  <title>About | Protonyx</title>
+  <title>Download | Protonyx</title>
 </head>
 <body>
 
@@ -35,15 +35,35 @@
     </div>
   </nav>
 
-  <section class="products-hero">
-    <div class="products-hero-inner">
-      <p class="products-label">About</p>
-    </div>
-  </section>
+  <main>
+    <section style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 1.5rem;">
+      <div style="text-align: center; max-width: 520px; width: 100%;">
+        <p style="font-size: 0.8rem; color: rgba(31,34,48,0.45); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.5rem;">
+          Available for Windows
+        </p>
 
-  <section class="intro-section">
-    <div class="section-shell" style="min-height: 40vh;"></div>
-  </section>
+        <button
+          id="downloadButton"
+          type="button"
+          class="btn-primary"
+          style="background: var(--grad); color: #fff; font-size: 1.15rem; font-weight: 700; padding: 1.1rem 2.6rem; border: none; border-radius: 8px; cursor: pointer; letter-spacing: 0.01em;"
+        >
+          Download Vector
+        </button>
+
+        <p style="font-size: 0.85rem; color: rgba(31,34,48,0.45); margin-top: 1.25rem;">
+          Version 0.4.1
+        </p>
+
+        <p style="font-size: 0.7rem; color: rgba(31,34,48,0.45); margin-top: 2rem; line-height: 1.6;">
+          By downloading you agree to our
+          <a href="/legal/terms.html" style="color: inherit; text-decoration: underline;">Terms of Service</a>
+          and
+          <a href="/legal/eula.html" style="color: inherit; text-decoration: underline;">End User License Agreement</a>.
+        </p>
+      </div>
+    </section>
+  </main>
 
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-overlay-inner">
@@ -88,6 +108,7 @@
 
   <script src="../script.js"></script>
   <script src="../auth/auth.js"></script>
+  <script src="./download.js"></script>
   <script>checkAuth();</script>
 </body>
 </html>
