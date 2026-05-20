@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/product/vector/vector_small.png">
   <link rel="stylesheet" href="../style.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
   <title>Account | Protonyx</title>
@@ -61,27 +62,27 @@
       <dl class="account-info-list">
         <!-- Source: GET /me -> user.username -->
         <dt>Username</dt>
-        <dd id="infoUsername">—</dd>
+        <dd id="infoUsername">-</dd>
 
         <!-- Source: GET /me -> user.email -->
         <dt>Email</dt>
-        <dd id="infoEmail">—</dd>
+        <dd id="infoEmail">-</dd>
 
         <!-- Source: GET /me -> user.plan (styled with --grad when 'pro') -->
         <dt>Plan</dt>
-        <dd id="infoPlan">—</dd>
+        <dd id="infoPlan">-</dd>
 
         <!-- Source: GET /me -> user.member_since (formatted) -->
         <dt>Member since</dt>
-        <dd id="infoMemberSince">—</dd>
+        <dd id="infoMemberSince">-</dd>
 
         <!-- Source: GET /me -> user.beta_access -->
         <dt>Beta access</dt>
-        <dd id="infoBetaAccess">—</dd>
+        <dd id="infoBetaAccess">-</dd>
 
         <!-- Source: GET /me -> user.download_count -->
         <dt>Downloads</dt>
-        <dd id="infoDownloadCount">—</dd>
+        <dd id="infoDownloadCount">-</dd>
       </dl>
 
       <div class="account-logout-row">
@@ -104,7 +105,6 @@
           <a href="/" class="menu-link-reveal">Home</a>
           <a href="/products" class="menu-link-reveal">Products</a>
           <a href="/products/vector" class="menu-link-reveal"> ⤷ Vector</a>
-          <a href="/careers" class="menu-link-reveal">Careers</a>
           <a href="/about" class="menu-link-reveal">About</a>
           <a href="/contact" class="menu-link-reveal">Contact</a>
           <button type="button" class="menu-logout-button auth-only" data-logout>Logout</button>
@@ -146,9 +146,9 @@
       }
 
       function formatMemberSince(value) {
-        if (!value) return "—";
+        if (!value) return "-";
         const d = new Date(value);
-        if (isNaN(d.getTime())) return "—";
+        if (isNaN(d.getTime())) return "-";
         return d.toLocaleDateString(undefined, {
           year: "numeric",
           month: "long",
@@ -159,7 +159,7 @@
       function render(profile) {
         // Source: GET /me (with localStorage as fallback for initial paint)
         const username = (profile && profile.username) || localStorage.getItem("username") || "User";
-        const email = (profile && profile.email) || localStorage.getItem("email") || "—";
+        const email = (profile && profile.email) || localStorage.getItem("email") || "-";
         const plan = (profile && profile.plan) || localStorage.getItem("plan") || "free";
         const memberSince = (profile && profile.member_since) || localStorage.getItem("member_since") || "";
         const betaAccess = profile

@@ -1,17 +1,17 @@
 /* ──────────────────────────────────────────────
-   style.css — entry point. Pages link this one
+   style.css: entry point. Pages link this one
    file; the real styles are split into four
    files imported below in cascade order. Keep
    them in this order so layered overrides
    resolve correctly.
 
-     base.css   — resets, tokens, typography,
-                  shared button primitives
-     chrome.css — navbar, menu overlay, footer,
-                  auth-state toggles
-     pages.css  — landing, products, Vector
-                  product page, account page
-     auth.css   — auth/forgot/reset/verify pages
+     base.css:   resets, tokens, typography,
+                 shared button primitives
+     chrome.css: navbar, menu overlay, footer,
+                 auth-state toggles
+     pages.css:  landing, products, Vector
+                 product page, account page
+     auth.css:   auth/forgot/reset/verify pages
    ────────────────────────────────────────────── */
 
 @import url("./base.css");
