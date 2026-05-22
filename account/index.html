@@ -33,7 +33,7 @@
     </div>
 
     <div class="navbar-actions">
-      <a href="/auth/index.html" class="navbar-signup-link guest-only">Create Account</a>
+      <a href="/auth/index.html?mode=signup" class="navbar-signup-link guest-only">Create Account</a>
       <a href="/account/index.html" class="navbar-profile-icon auth-only" aria-label="Account">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="8" r="4"></circle>
@@ -103,8 +103,7 @@
         <div class="menu-column">
           <p class="menu-label">Navigation</p>
           <a href="/" class="menu-link-reveal">Home</a>
-          <a href="/products" class="menu-link-reveal">Products</a>
-          <a href="/products/vector" class="menu-link-reveal"> ⤷ Vector</a>
+          <a href="/#plans" class="menu-link-reveal">Plans</a>
           <a href="/about" class="menu-link-reveal">About</a>
           <a href="/contact" class="menu-link-reveal">Contact</a>
           <button type="button" class="menu-logout-button auth-only" data-logout>Logout</button>
@@ -112,9 +111,10 @@
 
         <div class="menu-column">
           <p class="menu-label">Account</p>
-          <a href="/auth/index.html" class="menu-link-reveal guest-only">Create Account</a>
+          <a href="/auth/index.html?mode=signup" class="menu-link-reveal guest-only">Create Account</a>
           <a href="/auth/index.html" class="menu-link-reveal guest-only">Login</a>
           <a href="/account/index.html" class="menu-link-reveal auth-only">Profile</a>
+          <a href="/download" class="menu-link-reveal">Download</a>
         </div>
       </div>
     </div>

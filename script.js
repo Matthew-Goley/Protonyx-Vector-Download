@@ -17,7 +17,7 @@ if (navbarLogo) {
   // Any background-dark section on the page. The navbar logo goes white
   // whenever the navbar is sitting over one of these.
   const darkSections = Array.from(
-    document.querySelectorAll(".landing-hero, .vector-hero, .products-hero, .lp-section.dark")
+    document.querySelectorAll(".landing-hero, .products-hero, .lp-section.dark")
   );
 
   // Probe just below the floating navbar's baseline; a section "covers" the
@@ -52,26 +52,6 @@ if (navbarLogo) {
   setLogo(shouldLogoBeWhite(), false);
   window.addEventListener("scroll", () => setLogo(shouldLogoBeWhite(), true));
   window.addEventListener("resize", () => setLogo(shouldLogoBeWhite(), false));
-}
-
-
-// ─────────────────────────────────────────────
-//  Product Card Video Preview  (products listing page)
-// ─────────────────────────────────────────────
-const vectorCard = document.querySelector(".vector-card");
-
-if (vectorCard) {
-  const vectorVideo = vectorCard.querySelector(".preview-video");
-
-  vectorCard.addEventListener("mouseenter", () => {
-    vectorVideo.currentTime = 0;
-    vectorVideo.play();
-  });
-
-  vectorCard.addEventListener("mouseleave", () => {
-    vectorVideo.pause();
-    vectorVideo.currentTime = 0;
-  });
 }
 
 
