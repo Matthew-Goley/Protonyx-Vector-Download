@@ -98,6 +98,11 @@
       signup();
     });
 
+    // Open the Create account tab when linked with ?mode=signup (Create Account links in the navbar + menu).
+    if (new URLSearchParams(window.location.search).get("mode") === "signup") {
+      switchToSignupTab();
+    }
+
     checkAuth();
   </script>
 </body>
