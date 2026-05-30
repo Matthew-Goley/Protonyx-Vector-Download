@@ -17,6 +17,114 @@
       background-clip: text;
       font-weight: 600;
     }
+
+    /* Email row: badge on the left, verification control on the right. */
+    .account-info-list dd.email-cell {
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Verification badge wrapping the email value. Neutral base uses the
+       existing tokens; verified/unverified swap in two muted accent colors. */
+    .email-badge {
+      display: inline-block;
+      padding: 0.35rem 0.7rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      line-height: 1.2;
+      word-break: break-all;
+    }
+
+    /* Verified: muted green echoing the brand gradient's green stop (#3a8c6e). */
+    .email-badge.verified {
+      background: rgba(58, 140, 110, 0.10);
+      border-color: rgba(58, 140, 110, 0.40);
+      color: #2f7d5b;
+    }
+
+    /* Unverified: muted red, same low-saturation treatment. */
+    .email-badge.unverified {
+      background: rgba(179, 70, 63, 0.10);
+      border-color: rgba(179, 70, 63, 0.40);
+      color: #b3463f;
+    }
+
+    .email-verify-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Small, non-dominant variant of the page's outline button. */
+    .btn-verify {
+      padding: 0.4rem 0.9rem;
+      font-size: 0.75rem;
+    }
+
+    .verify-message {
+      font-size: 0.8rem;
+    }
+    .verify-message.success { color: #2f7d5b; }
+    .verify-message.error { color: #b3463f; }
+
+    /* Password row: masked value + reveal toggle on the left, reset on the right. */
+    .account-info-list dd.password-cell {
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .password-value {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .password-dots {
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--text-primary);
+    }
+
+    /* Delete account: small red-tinted ghost button reusing the exact unverified
+       email-badge palette. The .confirm state darkens the tint for the second
+       (destructive) click. */
+    .btn-delete-account {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      /* Match the Logout button (.btn-outline-gray) height: same vertical
+         padding, font-size, and border so the two sit level on the row. */
+      padding: 0.65rem 1.4rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      border-radius: 8px;
+      background: rgba(179, 70, 63, 0.10);
+      border: 1px solid rgba(179, 70, 63, 0.40);
+      color: #b3463f;
+      cursor: pointer;
+    }
+
+    /* Logout + Delete Account share one row: Delete on the left, Logout right. */
+    .account-actions-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+    }
+    .btn-delete-account:hover {
+      background: rgba(179, 70, 63, 0.16);
+    }
+    .btn-delete-account.confirm {
+      background: rgba(179, 70, 63, 0.22);
+      border-color: rgba(179, 70, 63, 0.55);
+    }
   </style>
 </head>
 <body>
@@ -65,9 +173,28 @@
         <dt>Username</dt>
         <dd id="infoUsername">-</dd>
 
-        <!-- Source: GET /me -> user.email -->
+        <!-- Source: GET /me -> user.email + user.email_verified -->
         <dt>Email</dt>
-        <dd id="infoEmail">-</dd>
+        <dd class="email-cell">
+          <span id="infoEmail" class="email-badge">-</span>
+          <span class="email-verify-actions">
+            <span id="verifyMessage" class="verify-message" role="status" aria-live="polite"></span>
+            <button type="button" id="resendVerifyBtn" class="btn-outline-gray btn-verify" hidden>Send Verification Email</button>
+          </span>
+        </dd>
+
+        <!-- Password is never returned by /me. Static masked placeholder + a
+             reset entry point that reuses the public /forgot-password flow. -->
+        <dt>Password</dt>
+        <dd class="password-cell">
+          <span class="password-value">
+            <span class="password-dots">••••••••••</span>
+          </span>
+          <span class="email-verify-actions">
+            <span id="changePwMessage" class="verify-message" role="status" aria-live="polite"></span>
+            <button type="button" id="changePwBtn" class="btn-outline-gray btn-verify">Change Password</button>
+          </span>
+        </dd>
 
         <!-- Source: GET /me -> user.plan (styled with --grad when 'pro') -->
         <dt>Plan</dt>
@@ -86,7 +213,8 @@
         <dd id="infoDownloadCount">-</dd>
       </dl>
 
-      <div class="account-logout-row">
+      <div class="account-actions-row">
+        <button type="button" id="deleteAccountBtn" class="btn-delete-account">Delete Account</button>
         <button type="button" class="btn-outline-gray" data-logout>Logout</button>
       </div>
     </div>
@@ -171,9 +299,34 @@
         const downloadCount = profile
           ? Number(profile.download_count ?? 0)
           : Number(localStorage.getItem("download_count") || 0);
+        const emailVerified = profile
+          ? Boolean(profile.email_verified)
+          : localStorage.getItem("email_verified") === "true";
+
+        // Cache email_verified so the next localStorage-first paint is accurate
+        // (loadProfile() in auth.js does not mirror this field).
+        if (profile) {
+          localStorage.setItem("email_verified", emailVerified ? "true" : "false");
+        }
 
         document.getElementById("infoUsername").textContent = username;
-        document.getElementById("infoEmail").textContent = email;
+
+        const emailEl = document.getElementById("infoEmail");
+        emailEl.textContent = email;
+        emailEl.classList.toggle("verified", emailVerified);
+        emailEl.classList.toggle("unverified", !emailVerified);
+
+        // The resend button shows only while unverified. A successful send
+        // leaves it disabled, so don't re-enable it here on re-render.
+        const resendBtn = document.getElementById("resendVerifyBtn");
+        if (resendBtn) resendBtn.hidden = emailVerified;
+        if (emailVerified) {
+          const verifyMessageEl = document.getElementById("verifyMessage");
+          if (verifyMessageEl) {
+            verifyMessageEl.textContent = "";
+            verifyMessageEl.classList.remove("success", "error");
+          }
+        }
 
         const planEl = document.getElementById("infoPlan");
         planEl.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
@@ -186,6 +339,144 @@
 
       // Initial paint from cached localStorage values…
       render(null);
+
+      // Resend verification email. Disables itself in flight to block
+      // double-sends; POSTs to /resend-verification (added server-side later).
+      const resendBtn = document.getElementById("resendVerifyBtn");
+      const verifyMessageEl = document.getElementById("verifyMessage");
+      if (resendBtn) {
+        resendBtn.addEventListener("click", async () => {
+          resendBtn.disabled = true;
+          if (verifyMessageEl) {
+            verifyMessageEl.textContent = "Sending…";
+            verifyMessageEl.classList.remove("success", "error");
+          }
+
+          try {
+            const response = await fetch(`${API_URL}/resend-verification`, {
+              method: "POST",
+              headers: { ...authHeaders() },
+            });
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+              const msg = (data && (data.message || data.error)) || "Could not send verification email.";
+              if (verifyMessageEl) {
+                verifyMessageEl.textContent = msg;
+                verifyMessageEl.classList.add("error");
+              }
+              resendBtn.disabled = false;
+              return;
+            }
+
+            if (verifyMessageEl) {
+              verifyMessageEl.textContent = "Verification email sent";
+              verifyMessageEl.classList.add("success");
+            }
+            // Stay disabled after success to discourage repeat sends.
+          } catch (err) {
+            if (verifyMessageEl) {
+              verifyMessageEl.textContent = "Unable to reach server. Please try again.";
+              verifyMessageEl.classList.add("error");
+            }
+            resendBtn.disabled = false;
+          }
+        });
+      }
+
+      // Change Password: triggers the public /forgot-password reset flow for the
+      // stored email. Disables itself in flight; stays disabled after success.
+      const changePwBtn = document.getElementById("changePwBtn");
+      const changePwMessage = document.getElementById("changePwMessage");
+      if (changePwBtn) {
+        changePwBtn.addEventListener("click", async () => {
+          changePwBtn.disabled = true;
+          if (changePwMessage) {
+            changePwMessage.textContent = "Sending…";
+            changePwMessage.classList.remove("success", "error");
+          }
+
+          try {
+            const response = await fetch(`${API_URL}/forgot-password`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email: localStorage.getItem("email") }),
+            });
+
+            if (!response.ok) {
+              if (changePwMessage) {
+                changePwMessage.textContent = "Could not send reset link. Please try again.";
+                changePwMessage.classList.add("error");
+              }
+              changePwBtn.disabled = false;
+              return;
+            }
+
+            if (changePwMessage) {
+              changePwMessage.textContent = "Reset link sent to your email";
+              changePwMessage.classList.add("success");
+            }
+            // Stay disabled after success to discourage repeat sends.
+          } catch (err) {
+            if (changePwMessage) {
+              changePwMessage.textContent = "Unable to reach server. Please try again.";
+              changePwMessage.classList.add("error");
+            }
+            changePwBtn.disabled = false;
+          }
+        });
+      }
+
+      // Delete account: two-click confirm. First click arms the button; a click
+      // anywhere else cancels it; the second click fires DELETE /account (route
+      // added server-side later) and logs out on success.
+      const deleteBtn = document.getElementById("deleteAccountBtn");
+      if (deleteBtn) {
+        let confirming = false;
+
+        function resetDelete() {
+          confirming = false;
+          deleteBtn.textContent = "Delete Account";
+          deleteBtn.classList.remove("confirm");
+        }
+
+        deleteBtn.addEventListener("click", async () => {
+          if (!confirming) {
+            confirming = true;
+            deleteBtn.textContent = "Are you sure?";
+            deleteBtn.classList.add("confirm");
+            return;
+          }
+
+          // Second click: perform the deletion.
+          deleteBtn.disabled = true;
+          try {
+            const response = await fetch(`${API_URL}/account`, {
+              method: "DELETE",
+              headers: { ...authHeaders() },
+            });
+
+            if (!response.ok) {
+              deleteBtn.disabled = false;
+              resetDelete();
+              return;
+            }
+
+            // Clears localStorage and redirects to /auth/index.html.
+            logout();
+          } catch (err) {
+            deleteBtn.disabled = false;
+            resetDelete();
+          }
+        });
+
+        // Any click outside the armed button cancels the confirmation state.
+        document.addEventListener("click", (e) => {
+          if (!confirming) return;
+          if (deleteBtn.contains(e.target)) return;
+          resetDelete();
+        });
+      }
 
       // …then refresh from GET /me and re-render with the authoritative profile.
       if (typeof loadProfile === "function") {
