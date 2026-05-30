@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = "https://protonyx-monorepo-production.up.railway.app";
 
 function getToken() {
   return localStorage.getItem("token");
@@ -136,6 +136,40 @@ async function loadProfile() {
   }
 }
 
+// Check whether the signed-in user has accepted the current Terms of Service.
+// If not, shows the blocking TOS modal (from legal-modal.js) and resolves only
+// once the user accepts. Resolves immediately when logged out.
+//
+// Fails open: if GET /legal/status errors for any reason, the user is logged
+// (to console) and let through rather than blocked.
+async function checkLegalAcceptance() {
+  const token = getToken();
+  if (!token) return;
+
+  let data;
+  try {
+    const response = await fetch(`${API_URL}/legal/status`, {
+      headers: { ...authHeaders() },
+    });
+
+    data = await response.json().catch(() => ({}));
+
+    if (!response.ok || !data.success) {
+      console.error("Legal status check failed; allowing through.");
+      return;
+    }
+  } catch (err) {
+    console.error("Legal status check failed; allowing through.", err);
+    return;
+  }
+
+  if (data.tos_accepted) return;
+
+  if (typeof showTosModal === "function") {
+    await showTosModal();
+  }
+}
+
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
@@ -160,6 +194,14 @@ function checkAuth() {
     el.classList.toggle("visible", !loggedIn);
   });
 
+  // Pro-only elements (e.g. the navbar "Professional" badge) show only when the
+  // signed-in user's cached plan is "pro". Plan is mirrored to localStorage by
+  // loadProfile(); other pages render from that cached value.
+  const isPro = loggedIn && (localStorage.getItem("plan") || "").toLowerCase() === "pro";
+  document.querySelectorAll(".pro-only").forEach((el) => {
+    el.classList.toggle("visible", isPro);
+  });
+
   document.querySelectorAll("[data-username]").forEach((el) => {
     el.textContent = username || "User";
   });
@@ -182,7 +224,7 @@ if (document.readyState === "loading") {
 }
 
 window.addEventListener("storage", (e) => {
-  if (e.key === "token" || e.key === "username" || e.key === null) {
+  if (e.key === "token" || e.key === "username" || e.key === "plan" || e.key === null) {
     checkAuth();
   }
 });

@@ -173,3 +173,20 @@
 .auth-forgot-link a:hover {
   color: rgba(255, 255, 255, 0.9);
 }
+
+.auth-terms-note {
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.auth-terms-note a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: underline;
+}
+
+.auth-terms-note a:hover {
+  color: rgba(255, 255, 255, 0.9);
+}

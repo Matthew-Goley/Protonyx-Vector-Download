@@ -978,12 +978,82 @@
   }
 }
 
+/* ── About page ── */
+.about-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 5rem 6% 6rem;
+}
+.about-block {
+  margin-bottom: 2.75rem;
+}
+.about-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2dd4bf;
+  margin-bottom: 0.55rem;
+}
+.about-h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin: 0 0 0.9rem;
+}
+.about-body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+  opacity: 0.78;
+}
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.about-list li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  opacity: 0.78;
+  padding-left: 1rem;
+  position: relative;
+}
+.about-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.58em;
+  width: 4px;
+  height: 4px;
+  background: #2dd4bf;
+  border-radius: 50%;
+}
+.about-rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 0 2.75rem;
+}
+.about-notice {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  opacity: 0.5;
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
 /* ── ToS page ── */
 .tos-content h2 {
   font-size: 1rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 1.5rem 0 0.3rem;
+  margin: 0.35rem 0 0.1rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-family: 'Times New Roman', Times, serif;
@@ -992,59 +1062,59 @@
 .tos-content li {
   color: var(--text-primary);
   font-size: 0.95rem;
-  line-height: 1.45;
-  margin-bottom: 0.25rem;
+  line-height: 1.25;
+  margin-bottom: 0.1rem;
   font-family: 'Times New Roman', Times, serif;
 }
 .tos-content ul {
-  margin: 0.1rem 0 0.4rem 1.5rem;
+  margin: 0.05rem 0 0.15rem 1.5rem;
 }
 .tos-content .tos-meta {
   font-size: 0.85rem;
   color: var(--text-primary);
   opacity: 0.55;
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
   font-family: 'Times New Roman', Times, serif;
 }
 .tos-content hr {
   border: none;
   border-top: 1px solid var(--border);
-  margin: 2rem 0;
+  margin: 0.6rem 0;
 }
 .tos-content .tos-footer {
   font-size: 0.8rem;
   color: var(--text-primary);
   opacity: 0.45;
   font-style: italic;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
   font-family: 'Times New Roman', Times, serif;
 }
 .tos-content h3 {
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 1rem 0 0.25rem;
+  margin: 0.35rem 0 0.05rem;
   font-family: 'Times New Roman', Times, serif;
 }
 .tos-content table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
-  margin: 1rem 0 1.5rem;
+  margin: 0.3rem 0 0.6rem;
 }
 .tos-content th {
   text-align: left;
   font-weight: 700;
   color: var(--text-primary);
   border-bottom: 2px solid var(--border);
-  padding: 0.5rem 0.75rem;
+  padding: 0.2rem 0.5rem;
   font-family: 'Times New Roman', Times, serif;
 }
 .tos-content td {
   color: var(--text-primary);
   border-bottom: 1px solid var(--border);
   font-family: 'Times New Roman', Times, serif;
-  padding: 0.6rem 0.75rem;
+  padding: 0.2rem 0.5rem;
   vertical-align: top;
-  line-height: 1.6;
+  line-height: 1.25;
 }
