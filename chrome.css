@@ -53,6 +53,7 @@
   cursor: pointer;
   border: none;
   padding: 0;
+  transition: background-color 0.2s ease;
 }
 
 .navbar-menu-button span {
@@ -60,6 +61,7 @@
   height: 2px;
   background-color: black;
   border-radius: 2px;
+  transition: background-color 0.2s ease;
 }
 
 /* ── Navbar profile icon + auth-aware menu links ── */
@@ -82,7 +84,7 @@
   justify-content: center;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 .navbar-profile-icon:hover {
@@ -118,6 +120,50 @@
 
 .navbar-signup-link.visible {
   display: inline-block;
+}
+
+/* Pro-plan badge: shown left of the profile icon only when the user is on Pro.
+   Same white/black text-color swap as the other navbar items. */
+.navbar-plan-badge {
+  display: none;
+  padding: 0 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.navbar-plan-badge.visible {
+  display: inline-block;
+}
+
+/* ── Navbar light-background overrides ── */
+.navbar--light .navbar-menu-button {
+  background-color: var(--text-primary);
+}
+
+.navbar--light .navbar-menu-button span {
+  background-color: white;
+}
+
+.navbar--light .navbar-profile-icon {
+  background: var(--text-primary);
+  color: white;
+}
+
+.navbar--light .navbar-signup-link {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.navbar--light .navbar-signup-link:hover {
+  color: black;
+}
+
+.navbar--light .navbar-plan-badge {
+  color: rgba(0, 0, 0, 0.75);
 }
 
 /* ── Menu overlay ── */

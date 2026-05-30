@@ -22,6 +22,7 @@
     </div>
     <div class="navbar-actions">
       <a href="/auth/index.html?mode=signup" class="navbar-signup-link guest-only">Create Account</a>
+      <span class="navbar-plan-badge pro-only">Professional</span>
       <a href="/account/index.html" class="navbar-profile-icon auth-only" aria-label="Account">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="8" r="4"></circle>
@@ -45,136 +46,249 @@
   <section class="intro-section">
     <div class="section-shell tos-content" style="max-width: 1400px; margin: 0 auto; padding: 5rem 6% 6rem;">
 
-      <p class="tos-meta"><strong>Effective Date:</strong> May 19, 2025 &nbsp;&bull;&nbsp; <strong>Version:</strong> 1.0</p>
+      <p class="tos-meta"><strong>Effective Date:</strong> May 25, 2026 &nbsp;&bull;&nbsp; <strong>Version:</strong> 3.0</p>
 
       <hr>
 
-      <p>Protonyx LLC ("Protonyx," "we," "us," or "our") operates the website protonyxdata.com and the Vector desktop application. This Privacy Policy explains what personal information we collect, how we use it, and your rights regarding that information.</p>
-      <p>We built Vector with a local-first architecture by design: your portfolio data never leaves your device. This policy reflects that commitment.</p>
+      <h2>Overview</h2>
+      <p>Protonyx LLC ("Protonyx," "we," "us," or "our") operates the website protonyxdata.com and the Vector desktop application (collectively, the "Services"). This Privacy Policy explains what personal information we collect, how we use it, with whom we share it, and your rights regarding that information.</p>
+      <p>We built Vector with a local-first architecture by design - your portfolio data never leaves your device. This policy reflects that commitment.</p>
+      <p>This Privacy Policy applies to users in the United States. The Services are not directed to, and are not available to, residents of the European Economic Area or the United Kingdom. Jurisdiction-specific rights for California residents are addressed in Section 11.</p>
 
       <hr>
 
       <h2>1. Who This Policy Applies To</h2>
-      <p>This policy applies to all users of the Protonyx website (protonyxdata.com) and the Vector desktop application. You must be at least 18 years old to create a Protonyx account or use the Services. We do not knowingly collect personal information from anyone under 18. If we learn that we have collected data from a person under 18, we will delete it promptly. If you believe a minor has created an account, contact us at legal@protonyxdata.com.</p>
+      <p>This policy applies to all users of protonyxdata.com and the Vector desktop application. <strong>You must be at least 18 years old to create a Protonyx account or use the Services.</strong> The Services are intended solely for users located in the United States. Users located in the European Economic Area or the United Kingdom are not permitted to use the Services and should not submit any personal information to Protonyx.</p>
+      <p>We do not knowingly collect personal information from anyone under 18 or from residents of the EEA or UK. If we learn that we have collected personal information from either group, we will delete it from our systems within 30 days. If you believe a minor has created an account, contact us immediately at legal@protonyxdata.com.</p>
+
+      <hr>
 
       <h2>2. Information We Collect</h2>
 
       <h3>2a. Information You Provide Directly</h3>
       <p>When you create a Protonyx account, we collect:</p>
       <ul>
-        <li>Username</li>
-        <li>Email address</li>
-        <li>Password (stored as a bcrypt hash - we never store your plaintext password)</li>
+        <li><strong>Username</strong></li>
+        <li><strong>Email address</strong></li>
+        <li><strong>Password</strong> - stored exclusively as a bcrypt hash (cost factor 10). We never store, transmit, or have access to your plaintext password at any point.</li>
       </ul>
       <p>We also record the following automatically upon account activity:</p>
       <ul>
-        <li>Account creation date (member_since)</li>
+        <li>Account creation date</li>
         <li>Last login timestamp</li>
         <li>Download count (number of times you have downloaded Vector)</li>
         <li>Plan type (free or pro)</li>
         <li>Beta access status</li>
       </ul>
-      <p>We do not collect your name, phone number, address, payment card details, or any financial account information at signup. If Stripe payment processing is added in the future, this policy will be updated before that change takes effect.</p>
+      <p>We do not collect your legal name, phone number, physical address, payment card details, or any financial account information at signup. If payment processing is added in the future, this Privacy Policy will be updated and users will be notified before that change takes effect.</p>
 
       <h3>2b. Information Collected Automatically</h3>
       <p><strong>Website (protonyxdata.com):</strong> We do not use Google Analytics, Meta Pixel, or any third-party tracking or analytics scripts. We do not set advertising cookies. We do not build behavioral profiles of visitors.</p>
-      <p><strong>Authentication cookie / session token:</strong> When you log in, a JSON Web Token (JWT) is stored in your browser's localStorage. This token identifies your session so you remain logged in. It is not a tracking cookie and contains only your user ID and username. It expires after 7 days.</p>
-      <p><strong>Server logs:</strong> Our hosting infrastructure may generate standard server access logs (IP address, timestamp, HTTP method, path, response code). These are operational logs used solely for security monitoring and debugging. We do not use them for marketing or user profiling.</p>
+      <p><strong>Authentication token:</strong> When you log in, a JSON Web Token (JWT) is stored in your browser's localStorage. This token identifies your session and contains only your user ID and username - it is not a tracking mechanism and is not shared with any third party. Tokens expire automatically after 7 days.</p>
+      <p><strong>Server logs:</strong> Our hosting infrastructure may generate standard server access logs (IP address, timestamp, HTTP method, request path, response code). These logs are used solely for security monitoring and infrastructure debugging. We do not use server logs for marketing, advertising, or user profiling. We retain server logs for no longer than <strong>90 days</strong>, after which they are automatically deleted.</p>
 
-      <h3>2c. Information the Desktop App Does NOT Send Us</h3>
-      <p>The Vector desktop application stores all of the following locally on your device only. None of it is transmitted to Protonyx:</p>
+      <h3>2c. Information the Desktop Application Does NOT Transmit</h3>
+      <p>The Vector desktop application stores all of the following locally on your device only. None of it is ever transmitted to Protonyx:</p>
       <ul>
         <li>Your investment positions (tickers, share counts, cost basis)</li>
         <li>Portfolio analytics results</li>
         <li>Lens engine output and history</li>
-        <li>Settings and preferences</li>
+        <li>Application settings and preferences</li>
         <li>Cached market data</li>
       </ul>
-      <p>The app does make outbound requests to third-party market data providers (see Section 4) containing only ticker symbols. No account credentials or personal information are included in those requests.</p>
+      <p>The application does make outbound requests to third-party market data providers (see Section 4) containing only ticker symbols. No account credentials, personal information, or device identifiers are included in those requests.</p>
+
+      <hr>
 
       <h2>3. How We Use Your Information</h2>
-      <p>We use the information we collect for the following purposes:</p>
-      <ul>
-        <li><strong>Account creation and authentication</strong> - to create and maintain your account and verify your identity on login</li>
-        <li><strong>Email verification</strong> - to confirm your email address is valid via a one-time verification link</li>
-        <li><strong>Password reset</strong> - to send a secure reset link when you request one</li>
-        <li><strong>Transactional email</strong> - to send account-related communications (welcome email, verification, password reset) via our email provider, Resend</li>
-        <li><strong>Download tracking</strong> - to record how many times you have downloaded Vector, visible to you on your account page</li>
-        <li><strong>Service improvement</strong> - aggregate, non-personal operational data may be used to improve the Services</li>
-      </ul>
-      <p>We do not use your information for advertising, behavioral profiling, or sale to third parties.</p>
+      <p>We process your personal information only for the following specific, defined purposes:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Purpose</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Account creation and authentication</td>
+            <td>To create and maintain your account and verify your identity on login</td>
+          </tr>
+          <tr>
+            <td>Email verification</td>
+            <td>To confirm your email address is valid via a one-time verification link</td>
+          </tr>
+          <tr>
+            <td>Password reset</td>
+            <td>To send a secure reset link when you request one</td>
+          </tr>
+          <tr>
+            <td>Transactional email</td>
+            <td>To send account-related communications via our email provider, Resend</td>
+          </tr>
+          <tr>
+            <td>Download tracking</td>
+            <td>To record how many times you have downloaded Vector, visible to you on your account page</td>
+          </tr>
+          <tr>
+            <td>Security monitoring and fraud prevention</td>
+            <td>To detect and respond to unauthorized access, abuse, or security threats</td>
+          </tr>
+          <tr>
+            <td>Service improvement</td>
+            <td>Aggregate, non-identifiable operational data may be used to improve the Services</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>We do not use your personal information for advertising, behavioral profiling, or sale to any third party under any circumstances.</p>
 
-      <h2>4. Third-Party Services</h2>
-      <p>We work with a small number of third-party services to operate the platform. These are the only external parties that may receive any data:</p>
+      <hr>
+
+      <h2>4. Third-Party Service Providers</h2>
+      <p>We work with a small, defined set of third-party service providers to operate the Services. These are the only external parties that may receive any data:</p>
       <table>
         <thead>
           <tr>
             <th>Service</th>
             <th>Purpose</th>
-            <th>Data shared</th>
+            <th>Data Shared</th>
+            <th>DPA in Place</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong>Resend</strong></td>
             <td>Transactional email (verification, password reset, welcome)</td>
-            <td>Your email address and username</td>
+            <td>Email address and username</td>
+            <td>Yes</td>
           </tr>
           <tr>
             <td><strong>Yahoo Finance (via yfinance)</strong></td>
-            <td>Market data retrieval by the desktop app</td>
+            <td>Market data retrieval by the desktop application</td>
             <td>Ticker symbols only - no personal data</td>
+            <td>N/A</td>
           </tr>
           <tr>
-            <td><strong>Stripe</strong> (planned, not yet active)</td>
+            <td><strong>Stripe</strong> (planned - not yet active)</td>
             <td>Payment processing for Pro plan</td>
-            <td>Payment details handled directly by Stripe under their own privacy policy</td>
+            <td>Payment details handled directly by Stripe under Stripe's own privacy policy</td>
+            <td>To be executed prior to activation</td>
           </tr>
         </tbody>
       </table>
-      <p>We do not sell, rent, or trade your personal information to any third party. We do not use advertising networks or data brokers.</p>
+      <p>We do not sell, rent, share, or otherwise disclose your personal information to any party not listed in this section, except as required by law or legal process, or as necessary to protect the rights, property, or safety of Protonyx, our users, or the public.</p>
+
+      <hr>
 
       <h2>5. Data Storage and Security</h2>
-      <p><strong>Account data</strong> is stored in a PostgreSQL database. Passwords are hashed using bcrypt (cost factor 10) and are never stored or transmitted in plaintext. Authentication tokens are signed with a secret key and expire after 7 days.</p>
-      <p><strong>Portfolio data</strong> is stored exclusively on your local device under your operating system's application data directory. Protonyx has no access to this data.</p>
-      <p>We implement reasonable technical and organizational measures to protect your account data. No method of transmission or storage is 100% secure, and we cannot guarantee absolute security. If you believe your account has been compromised, contact us immediately.</p>
+      <p><strong>Account data</strong> is stored in a PostgreSQL database. All data in transit between your browser or application and Protonyx servers is encrypted using TLS. Passwords are hashed using bcrypt and are never stored or transmitted in plaintext. Authentication tokens are cryptographically signed and expire after 7 days.</p>
+      <p><strong>Portfolio data</strong> is stored exclusively on your local device under your operating system's application data directory. Protonyx has no access to this data under any circumstances.</p>
+      <p>We implement and maintain the following technical and organizational security measures:</p>
+      <ul>
+        <li>TLS encryption for all data in transit</li>
+        <li>Bcrypt password hashing (cost factor 10)</li>
+        <li>Signed, expiring authentication tokens</li>
+        <li>Access controls limiting database access to authorized personnel only</li>
+        <li>Regular review of access logs for anomalous activity</li>
+      </ul>
+      <p>No method of electronic transmission or storage is 100% secure. We cannot guarantee absolute security. <strong>In the event of a data breach affecting your personal information, we will notify affected users no later than 30 days after discovery</strong>, or within the timeframe required by applicable state law if shorter. Notification will be provided via email and, where appropriate, via a notice on protonyxdata.com.</p>
+      <p>If you believe your account has been compromised, contact us immediately at legal@protonyxdata.com.</p>
+
+      <hr>
 
       <h2>6. Data Retention</h2>
-      <p>We retain your account data for as long as your account is active. If you request deletion of your account, we will delete your personal information from our database within 30 days, except where retention is required by law.</p>
-      <p>Verification tokens and password reset tokens are single-use and are deleted immediately upon use or expiration (reset tokens expire after 1 hour).</p>
+      <p>We retain your account data for as long as your account is active. If you request deletion of your account, we will delete your personal information from our active database systems within <strong>30 days</strong> of receiving your request, except where retention is required by applicable law.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Retention Period</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Account information (username, email, hashed password)</td>
+            <td>Duration of account + 30 days post-deletion request</td>
+          </tr>
+          <tr>
+            <td>Server access logs</td>
+            <td>90 days</td>
+          </tr>
+          <tr>
+            <td>Email verification tokens</td>
+            <td>Single-use; deleted immediately upon use or expiration (24-hour expiry)</td>
+          </tr>
+          <tr>
+            <td>Password reset tokens</td>
+            <td>Single-use; deleted immediately upon use or expiration (1-hour expiry)</td>
+          </tr>
+          <tr>
+            <td>Authentication tokens (JWT)</td>
+            <td>7-day expiry; revoked on logout</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
 
       <h2>7. Your Rights</h2>
-      <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+      <p>You have the following rights regarding your personal information. To exercise any right, email us at legal@protonyxdata.com. We will respond within <strong>30 days</strong>, or within the timeframe required by applicable law for your jurisdiction.</p>
       <ul>
         <li><strong>Access</strong> - request a copy of the personal data we hold about you</li>
-        <li><strong>Correction</strong> - request correction of inaccurate data</li>
-        <li><strong>Deletion</strong> - request deletion of your account and associated data</li>
-        <li><strong>Portability</strong> - request your data in a portable format</li>
+        <li><strong>Correction</strong> - request correction of inaccurate or incomplete data</li>
+        <li><strong>Deletion</strong> - request deletion of your account and all associated personal data</li>
+        <li><strong>Portability</strong> - request your personal data in a portable, machine-readable format</li>
+        <li><strong>Restriction</strong> - request that we restrict processing of your data in certain circumstances</li>
+        <li><strong>Objection</strong> - object to processing of your data for specific purposes</li>
       </ul>
-      <p>To exercise any of these rights, email us at legal@protonyxdata.com. We will respond within 30 days.</p>
-      <p>California residents may have additional rights under the CCPA/CPRA, including the right to know what personal information is sold or disclosed (we do not sell personal information) and the right to opt out of sale (not applicable).</p>
+      <p>We will not discriminate against you for exercising any of your privacy rights.</p>
+
+      <hr>
 
       <h2>8. Cookies and Tracking</h2>
-      <p>We do not use tracking cookies, advertising cookies, or analytics cookies. The only browser storage we use is localStorage to hold your authentication token after login. You can clear this at any time by logging out or clearing your browser's local storage.</p>
+      <p>We do not use tracking cookies, advertising cookies, or analytics cookies of any kind.</p>
+      <p>The only browser-side storage we use is <strong>localStorage</strong> to hold your authentication token after login. This token contains only your user ID and username and is used exclusively to maintain your login session. You can delete this token at any time by logging out or manually clearing your browser's localStorage. Clearing this token will log you out of your session.</p>
+
+      <hr>
 
       <h2>9. Children's Privacy</h2>
-      <p>The Services are intended for users 18 years of age and older. We do not knowingly collect personal information from anyone under 18. If you are under 18, do not create an account or use the Services.</p>
+      <p>The Services are intended exclusively for users 18 years of age and older. We do not knowingly collect, use, or disclose personal information from any person under 18. If you are under 18, you must not create an account or use the Services. If we become aware that we have collected personal information from a person under 18, we will delete that information from our systems within 30 days. To report a potential minor account, contact legal@protonyxdata.com.</p>
+
+      <hr>
 
       <h2>10. Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time. When we do, we will update the Effective Date at the top of this page. Material changes will be communicated via email to registered users or through a notice on the website. Continued use of the Services after changes constitutes acceptance of the revised policy.</p>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our practices, the Services, or applicable law. When we update this policy, we will revise the Effective Date at the top of this document.</p>
+      <p><strong>Material changes</strong> - meaning changes that meaningfully affect how we collect, use, or share your personal information - will be communicated to you via email to the address associated with your account <strong>and</strong> through a prominent notice on protonyxdata.com, no less than <strong>14 days</strong> before the changes take effect. Continued use of the Services after the effective date of any material change constitutes your acceptance of the revised policy.</p>
 
-      <h2>11. Contact</h2>
-      <p>For privacy-related questions, requests, or concerns, contact Protonyx LLC at:</p>
+      <hr>
+
+      <h2>11. Additional Rights for California Residents (CCPA/CPRA)</h2>
+      <p>If you are a California resident, the following additional provisions apply under the California Consumer Privacy Act ("CCPA") and the California Privacy Rights Act ("CPRA").</p>
+      <p><strong>Categories of Personal Information Collected.</strong> In the past 12 months, we have collected the following categories of personal information: identifiers (username, email address, IP address); internet or other electronic network activity information (server logs, login timestamps); and inferences drawn from account activity (download count, plan type).</p>
+      <p><strong>We Do Not Sell or Share Personal Information.</strong> We do not sell your personal information to any third party. We do not share your personal information for cross-context behavioral advertising purposes. You therefore have no need to opt out of sale or sharing, but you retain the right to submit such a request and we will confirm our non-sale status in writing.</p>
+      <p><strong>Your California Rights.</strong> You have the right to: know what personal information we collect, use, disclose, or sell; request deletion of your personal information; correct inaccurate personal information; and opt out of sale or sharing (not applicable - we do not sell or share).</p>
+      <p><strong>Non-Discrimination.</strong> We will not discriminate against you in any way for exercising your California privacy rights.</p>
+      <p><strong>Authorized Agents.</strong> You may designate an authorized agent to make requests on your behalf. We may require verification of the agent's identity and authorization before processing such requests.</p>
+      <p>To exercise your California rights, email legal@protonyxdata.com. We will respond within <strong>45 days</strong>, with a possible extension of an additional 45 days where reasonably necessary, and will notify you of any extension within the initial 45-day period.</p>
+
+      <hr>
+
+      <h2>12. Geographic Restriction - EEA and UK Users</h2>
+      <p>The Services are not directed to, and are not intended for use by, residents of the European Economic Area or the United Kingdom. If you are located in the EEA or UK, you must not use the Services or submit any personal information to Protonyx. We do not knowingly collect personal information from EEA or UK residents. If we become aware that we have done so, we will delete that information from our systems within 30 days.</p>
+
+      <hr>
+
+      <h2>13. Contact</h2>
+      <p>For privacy-related questions, requests, complaints, or legal notices, contact Protonyx LLC at:</p>
       <ul>
         <li>Website: protonyxdata.com</li>
         <li>Email: legal@protonyxdata.com</li>
       </ul>
-      <p>We will respond within 30 days.</p>
+      <p>We will respond within 30 days, or within the timeframe required by applicable law for your jurisdiction.</p>
 
       <hr>
 
-      <p class="tos-footer">Protonyx LLC | Version 1.0 | May 19, 2025</p>
-      <p class="tos-footer">DRAFT - Consult qualified legal counsel before finalizing.</p>
+      <p class="tos-footer">Protonyx LLC | Version 3.0 | May 25, 2026</p>
 
       <div style="margin-top: 2.5rem;">
         <a href="/assets/company/pp.pdf" download="Protonyx-Privacy-Policy.pdf" class="btn-outline-gray">Download PDF</a>
@@ -206,7 +320,7 @@
           <a href="/auth/index.html?mode=signup" class="menu-link-reveal guest-only">Create Account</a>
           <a href="/auth/index.html" class="menu-link-reveal guest-only">Login</a>
           <a href="/account/index.html" class="menu-link-reveal auth-only">Profile</a>
-          <a href="/download" class="menu-link-reveal">Download</a>
+          <a href="/assets/downloads/Vector-Setup.exe" download data-download class="menu-link-reveal">Download</a>
         </div>
       </div>
     </div>
@@ -219,6 +333,7 @@
         <a href="/tos">Terms of Service</a>
         <a href="/privacy">Privacy Policy</a>
         <a href="/contact">Contact</a>
+        <a href="/about">About</a>
       </nav>
     </div>
   </footer>

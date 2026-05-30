@@ -22,6 +22,7 @@
     </div>
     <div class="navbar-actions">
       <a href="/auth/index.html?mode=signup" class="navbar-signup-link guest-only">Create Account</a>
+      <span class="navbar-plan-badge pro-only">Professional</span>
       <a href="/account/index.html" class="navbar-profile-icon auth-only" aria-label="Account">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="8" r="4"></circle>
@@ -43,7 +44,44 @@
   </section>
 
   <section class="intro-section">
-    <div class="section-shell" style="min-height: 40vh;"></div>
+    <div class="about-content">
+
+      <div class="about-block">
+        <p class="about-eyebrow">The Company</p>
+        <h2 class="about-h2">Actionable Insight for Everyone.</h2>
+        <p class="about-body">Protonyx LLC is a financial technology company focused on redefining what everyday individuals can accomplish with better infrastructure and intelligent software. Founded in 2026 by Michael Goley and Matthew Goley.</p>
+      </div>
+
+      <div class="about-block">
+        <p class="about-eyebrow">Mission</p>
+        <p class="about-body">To give individuals clarity and control over complex financial decisions through engineered intelligence.</p>
+      </div>
+
+      <div class="about-block">
+        <p class="about-eyebrow">Philosophy</p>
+        <ul class="about-list">
+          <li>Simplicity is critical</li>
+          <li>Product quality above everything else</li>
+          <li>Intelligence should be accessible, not overwhelming</li>
+          <li>Tools should provide answers, not just data</li>
+        </ul>
+      </div>
+
+      <hr class="about-rule">
+
+      <div class="about-block">
+        <p class="about-eyebrow">Vector</p>
+        <p class="about-body">Vector is a desktop portfolio analytics application built for self-directed investors. It combines traditional financial analytics with the Lens engine - a modular analytical framework that processes your portfolio and delivers a ranked, prioritized set of actions.</p>
+        <p class="about-body" style="margin-top: 0.75rem;">All data is stored locally on your device. No brokerage link required. Nothing leaves your machine.</p>
+      </div>
+
+      <div class="about-block">
+        <p class="about-eyebrow">Lens Engine</p>
+        <p class="about-body">Lens processes your portfolio and outputs a concise three-part brief: current state, context, and a single prioritized action. It runs Monte Carlo simulations to show how suggested changes affect portfolio risk, and generates a full projection list ranked by impact.</p>
+        <p class="about-notice">Protonyx is not a financial advisor. All Lens outputs are mathematical analysis and projections, not investment advice.</p>
+      </div>
+
+    </div>
   </section>
 
   <div class="menu-overlay" id="menuOverlay">
@@ -69,7 +107,7 @@
           <a href="/auth/index.html?mode=signup" class="menu-link-reveal guest-only">Create Account</a>
           <a href="/auth/index.html" class="menu-link-reveal guest-only">Login</a>
           <a href="/account/index.html" class="menu-link-reveal auth-only">Profile</a>
-          <a href="/download" class="menu-link-reveal">Download</a>
+          <a href="/assets/downloads/Vector-Setup.exe" download data-download class="menu-link-reveal">Download</a>
         </div>
       </div>
     </div>
@@ -82,6 +120,7 @@
         <a href="/tos">Terms of Service</a>
         <a href="/privacy">Privacy Policy</a>
         <a href="/contact">Contact</a>
+        <a href="/about">About</a>
       </nav>
     </div>
   </footer>

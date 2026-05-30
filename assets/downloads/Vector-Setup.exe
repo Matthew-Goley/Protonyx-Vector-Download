@@ -1,0 +1,7 @@
+PLACEHOLDER ARTIFACT - NOT A REAL EXECUTABLE
+
+This file stands in for the Vector Windows installer so the site's Download
+buttons trigger a real browser download during development. Replace its
+contents with the actual Nuitka build output (Vector-v<version>.exe) before
+shipping, keeping this filename so the /assets/downloads/Vector-Setup.exe URL
+stays stable across releases.
