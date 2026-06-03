@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git:*)",
       "Bash(ls -d */)",
-      "Bash(ls legal *)"
+      "Bash(ls legal *)",
+      "Bash(curl -s \"https://api.github.com/repos/Matthew-Goley/Protonyx-Vector-Download/releases/tags/v0.5.0_Installer\")"
     ]
   }
 }

@@ -146,20 +146,32 @@ if (fadeTargets.length && "IntersectionObserver" in window) {
 
 
 // ─────────────────────────────────────────────
-//  Download counter  (all pages)
+//  Download button  (all pages)
 //
-//  Every [data-download] element is a native download
-//  link (href + download attr) pointing at the Vector
-//  installer, so the browser handles the actual file
-//  download. On click we additionally bump the signed-in
-//  user's download_count via POST /download. A missing
-//  token or a failed counter call never blocks the
-//  download. API_URL comes from auth/auth.js.
+//  Single source of truth for the installer URL. Every
+//  [data-download] element (hero CTA, pricing button,
+//  menu link) gets its href pointed at the pinned GitHub
+//  release asset, so one click downloads the .exe
+//  directly — GitHub serves release assets with an
+//  attachment disposition, so the browser downloads the
+//  file without navigating away. On click we also bump
+//  the signed-in user's download_count via POST /download;
+//  a missing token or a failed counter call never blocks
+//  the download. API_URL comes from auth/auth.js.
+//
+//  Bumping the Vector version: change DOWNLOAD_URL here
+//  only — the HTML buttons just carry a /releases/latest
+//  no-JS fallback href that never needs editing.
 // ─────────────────────────────────────────────
+const DOWNLOAD_URL =
+  "https://github.com/Matthew-Goley/Protonyx-Vector-Download/releases/download/v0.5.0_Installer/Vector-Setup-v0.5.0.exe";
+
 const downloadLinks = document.querySelectorAll("[data-download]");
 
 if (downloadLinks.length) {
   downloadLinks.forEach((el) => {
+    el.setAttribute("href", DOWNLOAD_URL);
+
     el.addEventListener("click", () => {
       const token = localStorage.getItem("token");
       if (!token || typeof API_URL === "undefined") return;
