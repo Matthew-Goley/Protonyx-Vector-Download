@@ -94,9 +94,15 @@
       login();
     });
 
-    signupForm.addEventListener("submit", (e) => {
+    signupForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      signup();
+      // Capture before signup() runs — it clears the signup username field on success.
+      const enteredUsername = document.getElementById("signupUsername").value.trim();
+      await signup();
+      // On success signup() switches to the login tab; carry the username over.
+      if (enteredUsername && loginForm.classList.contains("active")) {
+        document.getElementById("loginUsername").value = enteredUsername;
+      }
     });
 
     // Open the Create account tab when linked with ?mode=signup (Create Account links in the navbar + menu).

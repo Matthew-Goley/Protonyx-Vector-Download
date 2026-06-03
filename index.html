@@ -41,6 +41,16 @@
 
   <!-- ── Hero ── -->
   <section class="landing-hero">
+    <div class="beta-banner">
+      <span class="beta-banner-main">
+        <span class="beta-dot" id="betaMainDot" aria-hidden="true" style="background: #ff6464; animation: none;"></span>
+        Open Beta · Live June 5 onward · All Pro features free · No card required
+      </span>
+      <span class="beta-banner-status">
+        <span class="beta-dot" id="betaStatusDot" aria-hidden="true" style="background: #ff6464; animation: none;"></span>
+        <span id="betaStatusText" style="color: rgba(255, 100, 100, 0.8);">Beta Offline</span>
+      </span>
+    </div>
     <div class="landing-hero-inner">
       <div class="landing-hero-left">
         <p class="landing-hero-eyebrow">Vector</p>
@@ -61,7 +71,7 @@
             </svg>
             Download for Windows
           </a>
-          <a href="#plans" class="btn-ghost">View plans</a>
+          <p class="landing-hero-beta-note">Join the beta</p>
         </div>
       </div>
 
@@ -216,35 +226,12 @@
   <section class="lp-section base" id="plans">
     <div class="lp-section-inner center">
       <p class="lp-eyebrow">Plans</p>
-      <h2 class="lp-h2">Start free.<br>Upgrade when you outgrow it.</h2>
-
-      <div class="pricing-toggle">
-        <div class="pricing-toggle-group" data-interval="monthly" role="group" aria-label="Billing interval">
-          <span class="pricing-toggle-thumb" aria-hidden="true"></span>
-          <button type="button" class="pricing-toggle-option" data-interval="monthly">Monthly</button>
-          <button type="button" class="pricing-toggle-option" data-interval="annual">Annually</button>
-          <span class="pricing-toggle-badge">Save 17%</span>
-        </div>
-      </div>
+      <h2 class="lp-h2">Open Beta.<br>Everything free until we launch.</h2>
 
       <div class="pricing-grid fade-in">
-        <div class="pricing-card">
-          <p class="pricing-tier">Vector Free</p>
-          <div class="pricing-price">$0<span> / forever</span></div>
-          <hr class="pricing-divider">
-          <ul class="pricing-features">
-            <li>Full dashboard with modular widgets</li>
-            <li>15 positions and tickers</li>
-            <li>Dark and light themes</li>
-            <li>Secure and local-only storage</li>
-          </ul>
-          <a href="/assets/downloads/Vector-Setup.exe" download data-download class="btn-ghost">Download Vector</a>
-        </div>
-
         <div class="pricing-card featured">
-          <span class="pricing-badge">Recommended</span>
           <p class="pricing-tier paid">Vector Professional</p>
-          <div class="pricing-price" data-monthly-amount="$10" data-monthly-period=" / month" data-annual-amount="$100" data-annual-period=" / year">$10<span> / month</span></div>
+          <div class="pricing-price">$0<span> / during beta</span></div>
           <hr class="pricing-divider">
           <ul class="pricing-features">
             <li>Everything in Free</li>
@@ -254,10 +241,11 @@
             <li>Custom Lens thresholds per ticker</li>
             <li>Priority email support</li>
           </ul>
-          <!-- TODO: replace # with real Stripe checkout URL once provisioned -->
-          <a href="#" class="btn-primary">Get Professional</a>
+          <a href="/assets/downloads/Vector-Setup.exe" download data-download class="btn-primary">Join Beta Free</a>
         </div>
       </div>
+
+      <p class="pricing-beta-note">Full Pro access during the beta. No card, no commitment. Converts after beta closes.</p>
     </div>
   </section>
 
@@ -303,6 +291,7 @@
       <nav class="footer-links">
         <a href="/tos">Terms of Service</a>
         <a href="/privacy">Privacy Policy</a>
+        <a href="/eula">EULA</a>
         <a href="/contact">Contact</a>
         <a href="/about">About</a>
       </nav>
@@ -312,5 +301,32 @@
   <script src="script.js"></script>
   <script src="auth/auth.js"></script>
   <script>checkAuth();</script>
+  <script>
+    // Beta banner status indicator. Defaults to the red/offline state in the
+    // markup; flips to green/active only on a confirmed beta_active response,
+    // so a failed fetch stays looking like offline.
+    (async () => {
+      const dot = document.getElementById("betaStatusDot");
+      const mainDot = document.getElementById("betaMainDot");
+      const text = document.getElementById("betaStatusText");
+      if (!dot || !text) return;
+      try {
+        const res = await fetch(`${API_URL}/beta-status`);
+        const data = await res.json();
+        if (data && data.beta_active) {
+          dot.style.background = "#22c55e";
+          dot.style.animation = "";
+          if (mainDot) {
+            mainDot.style.background = "#22c55e";
+            mainDot.style.animation = "";
+          }
+          text.style.color = "";
+          text.textContent = "Beta Active";
+        }
+      } catch (err) {
+        // Leave the default offline state on any failure.
+      }
+    })();
+  </script>
 </body>
 </html>

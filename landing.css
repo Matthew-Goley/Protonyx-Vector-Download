@@ -16,9 +16,57 @@
   min-height: 100vh;
   background: #0c0f16;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 160px 3.5% 6rem;
   overflow: hidden;
+}
+
+/* ── Beta banner (pill row above the hero grid) ── */
+.beta-banner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  margin: 0 auto 2rem;
+  padding: 0.4rem 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.beta-banner-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.beta-banner-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(45, 212, 191, 0.75);
+}
+
+@keyframes betaDotPulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%      { transform: scale(1.3); opacity: 0.6; }
+}
+
+.beta-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: betaDotPulse 12s ease-in-out infinite;
 }
 
 @keyframes heroPulse {
@@ -91,9 +139,10 @@
 
 .landing-hero-actions {
   display: flex;
-  gap: 1.1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
+  gap: 0;
+  width: fit-content;
   margin-top: 0.75rem;
 }
 
@@ -112,6 +161,14 @@
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+}
+
+.landing-hero-beta-note {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  font-family: "IBM Plex Mono", monospace;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
 }
 
 /* ── macOS-style window frame holding the demo video ── */
@@ -546,6 +603,27 @@
   color: rgba(31, 34, 48, 0.45);
 }
 
+.pricing-subtext {
+  font-size: clamp(0.85rem, 0.9vw, 1rem);
+  color: rgba(31, 34, 48, 0.55);
+  line-height: 1.4;
+}
+
+.pricing-beta-note {
+  margin: 2rem auto 0;
+  max-width: 480px;
+  font-size: clamp(0.85rem, 0.9vw, 1rem);
+  color: rgba(31, 34, 48, 0.55);
+  line-height: 1.5;
+}
+
+/* Single beta card: center it on the page */
+.pricing-grid {
+  grid-template-columns: 1fr;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
 .pricing-badge {
   position: absolute;
   top: -11px;
@@ -832,7 +910,7 @@
   .value-grid,
   .feature-grid-6,
   .steps-grid { grid-template-columns: 1fr; }
-  .landing-hero-actions { flex-direction: column; align-items: stretch; }
+  .landing-hero-actions { flex-direction: column; align-items: stretch; width: auto; }
   .landing-hero-actions .btn-primary,
   .landing-hero-actions .btn-ghost { width: 100%; padding: 0.9rem 1.6rem; }
   .final-cta-actions { flex-direction: column; align-items: stretch; width: 100%; }
