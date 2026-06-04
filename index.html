@@ -302,29 +302,35 @@
   <script src="auth/auth.js"></script>
   <script>checkAuth();</script>
   <script>
-    // Beta banner status indicator. Defaults to the red/offline state in the
-    // markup; flips to green/active only on a confirmed beta_active response,
-    // so a failed fetch stays looking like offline.
+    // Beta banner status indicator, wired to GET /beta/status
+    // ({ success, open, spots_remaining }). Defaults to the red/offline state
+    // in the markup; flips to green "Open Beta" only on a confirmed open
+    // response, so a failed fetch stays looking like offline. When the beta is
+    // full it shows "Beta Full" and flips the "join the beta" note to match.
+    // The download button stays live regardless: only account creation is gated.
     (async () => {
       const dot = document.getElementById("betaStatusDot");
       const mainDot = document.getElementById("betaMainDot");
       const text = document.getElementById("betaStatusText");
+      const betaNote = document.querySelector(".landing-hero-beta-note");
       if (!dot || !text) return;
-      try {
-        const res = await fetch(`${API_URL}/beta-status`);
-        const data = await res.json();
-        if (data && data.beta_active) {
-          dot.style.background = "#22c55e";
-          dot.style.animation = "";
-          if (mainDot) {
-            mainDot.style.background = "#22c55e";
-            mainDot.style.animation = "";
-          }
-          text.style.color = "";
-          text.textContent = "Beta Active";
+      const status = await fetchBetaStatus();
+      if (!status) return; // Leave the default offline state on any failure.
+
+      if (status.open) {
+        dot.style.background = "#22c55e";
+        dot.style.animation = "";
+        if (mainDot) {
+          mainDot.style.background = "#22c55e";
+          mainDot.style.animation = "";
         }
-      } catch (err) {
-        // Leave the default offline state on any failure.
+        text.style.color = "";
+        text.textContent = "Open Beta";
+      } else {
+        dot.style.background = "#ff6464";
+        text.style.color = "rgba(255, 100, 100, 0.8)";
+        text.textContent = "Beta Full";
+        if (betaNote) betaNote.textContent = "Beta Full";
       }
     })();
   </script>

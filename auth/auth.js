@@ -109,6 +109,21 @@ async function signup() {
   }
 }
 
+// Fetch public beta status from GET /beta/status, which returns
+// { success, open, spots_remaining }. No auth required. Returns the parsed
+// object on success, or null on any network/parse error so callers can fail
+// open (treat a null result as "beta open" and show the signup form).
+async function fetchBetaStatus() {
+  try {
+    const response = await fetch(`${API_URL}/beta/status`);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data.success) return null;
+    return data;
+  } catch (err) {
+    return null;
+  }
+}
+
 // Fetch the current user's profile from GET /me and mirror the key fields into
 // localStorage so pages can render without waiting on a network round-trip.
 async function loadProfile() {

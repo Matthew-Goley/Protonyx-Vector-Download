@@ -17,6 +17,11 @@
       </a>
     </div>
 
+    <div class="auth-beta-status" id="authBetaStatus" aria-live="polite">
+      <span class="auth-beta-dot" id="authBetaDot" aria-hidden="true"></span>
+      <span id="authBetaText">Checking beta status...</span>
+    </div>
+
     <div class="auth-tabs" role="tablist">
       <button type="button" class="auth-tab active" id="tabLogin" role="tab" aria-selected="true">Sign in</button>
       <button type="button" class="auth-tab" id="tabSignup" role="tab" aria-selected="false">Create account</button>
@@ -53,8 +58,13 @@
       </div>
       <p class="auth-message" id="signupMessage" aria-live="polite"></p>
       <button type="submit" class="auth-submit">Create account</button>
+      <p class="auth-spots-note" id="signupSpots" hidden></p>
       <p class="auth-terms-note">By creating an account, you agree to our <a href="/tos" target="_blank" rel="noopener noreferrer">Terms of Service</a>.</p>
     </form>
+
+    <div class="auth-form auth-beta-full" id="betaFull" role="tabpanel">
+      <p>The open beta is currently full. Check back soon.</p>
+    </div>
 
     <p class="auth-footer-link">
       <a href="../index.html">← Back to Home Page</a>
@@ -67,6 +77,12 @@
     const tabSignup = document.getElementById("tabSignup");
     const loginForm = document.getElementById("loginForm");
     const signupForm = document.getElementById("signupForm");
+    const betaFull = document.getElementById("betaFull");
+
+    // Flipped to true once GET /beta/status confirms the beta is full. While
+    // closed, the Create-account tab shows the "beta full" message instead of
+    // the signup form. Login is never gated.
+    let betaClosed = false;
 
     function switchToLoginTab() {
       tabLogin.classList.add("active");
@@ -75,6 +91,7 @@
       tabSignup.setAttribute("aria-selected", "false");
       loginForm.classList.add("active");
       signupForm.classList.remove("active");
+      betaFull.classList.remove("active");
     }
 
     function switchToSignupTab() {
@@ -82,8 +99,15 @@
       tabSignup.setAttribute("aria-selected", "true");
       tabLogin.classList.remove("active");
       tabLogin.setAttribute("aria-selected", "false");
-      signupForm.classList.add("active");
       loginForm.classList.remove("active");
+      // When the beta is full, show the message where the signup form would be.
+      if (betaClosed) {
+        signupForm.classList.remove("active");
+        betaFull.classList.add("active");
+      } else {
+        signupForm.classList.add("active");
+        betaFull.classList.remove("active");
+      }
     }
 
     tabLogin.addEventListener("click", switchToLoginTab);
@@ -109,6 +133,40 @@
     if (new URLSearchParams(window.location.search).get("mode") === "signup") {
       switchToSignupTab();
     }
+
+    // Beta status: reflect GET /beta/status in the indicator and gate the signup
+    // tab. Fails open (null status leaves the signup form usable and the
+    // indicator green) so a backend outage never blocks account creation.
+    (async () => {
+      const dot = document.getElementById("authBetaDot");
+      const text = document.getElementById("authBetaText");
+      const spotsNote = document.getElementById("signupSpots");
+      const status = await fetchBetaStatus();
+
+      if (status && status.open === false) {
+        betaClosed = true;
+        if (dot) dot.className = "auth-beta-dot closed";
+        if (text) text.textContent = "Beta Full";
+        // If the page opened straight to the signup tab, re-render it as the
+        // "beta full" message; otherwise stay on login.
+        if (tabSignup.classList.contains("active")) {
+          switchToSignupTab();
+        }
+        return;
+      }
+
+      // Open, or fail-open on a null status.
+      if (dot) dot.className = "auth-beta-dot open";
+      if (text) text.textContent = "Open Beta";
+
+      // Subtle urgency only when the count is low enough to matter.
+      if (status && typeof status.spots_remaining === "number" &&
+          status.spots_remaining <= 20 && spotsNote) {
+        const n = status.spots_remaining;
+        spotsNote.textContent = n + (n === 1 ? " spot remaining" : " spots remaining");
+        spotsNote.hidden = false;
+      }
+    })();
 
     checkAuth();
   </script>

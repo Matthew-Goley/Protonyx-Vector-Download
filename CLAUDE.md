@@ -27,11 +27,11 @@ To exercise the auth, profile, download-counter, password-reset, email-verify, a
 
 Pages (each `*/index.html` is its own route):
 
-- `index.html` — Home / landing page. Beta-focused: a top **beta banner** with a live status dot (polls `GET /beta-status`), a dark two-column hero with a Lens demo video and a "Download for Windows" CTA, a three-step "Discovery" video walkthrough (Enter / Read / Act), a light trust strip, and a single-card **pricing** section (Vector Professional, "$0 / during beta", "Join Beta Free"). This is the only page that loads `landing.css`.
+- `index.html` — Home / landing page. Beta-focused: a top **beta banner** with a live status dot (polls `GET /beta/status` via `fetchBetaStatus()`), a dark two-column hero with a Lens demo video and a "Download for Windows" CTA, a three-step "Discovery" video walkthrough (Enter / Read / Act), a light trust strip, and a single-card **pricing** section (Vector Professional, "$0 / during beta", "Join Beta Free"). This is the only page that loads `landing.css`. The banner dot defaults to red "Beta Offline" and flips to green "Open Beta" when the beta is open or red "Beta Full" when closed; when full, the hero's "join the beta" note also reads "Beta Full". The download button stays live regardless of beta status (only account creation is gated, on the auth page).
 - `about/index.html` — About page. Fully built out: company blurb (Protonyx LLC, founded 2026 by Michael Goley and Matthew Goley), mission, philosophy list, and Vector / Lens engine descriptions.
 - `contact/index.html` — Contact details (`admin@protonyxdata.com`, phone `314-330-1843`).
 - `account/index.html` — Signed-in profile page. Redirects to `/auth` if no token. Reads from `GET /me`. Shows username, email (with a verified/unverified badge + "Send Verification Email"), a masked password row with "Change Password", plan (gradient-styled when Pro), member-since, beta access, and download count. Footer row has **Delete Account** (two-click confirm → `DELETE /account`) and **Logout**. Also runs `checkLegalAcceptance()` to surface the blocking TOS modal.
-- `auth/index.html` — Combined Sign in / Create account page (tabbed). Logic in `auth/auth.js` plus an inline tab-switching script. `?mode=signup` opens the Create-account tab.
+- `auth/index.html` — Combined Sign in / Create account page (tabbed). Logic in `auth/auth.js` plus an inline tab-switching script. `?mode=signup` opens the Create-account tab. On load it calls `fetchBetaStatus()` (`GET /beta/status`) and shows a small status indicator below the logo (green dot "Open Beta" / red dot "Beta Full"). **Signup is gated on beta openness; login never is.** When the beta is full the Create-account tab renders a "The open beta is currently full. Check back soon." message in place of the form (via the `#betaFull` panel and the `betaClosed` flag in the inline script); the login form still works. When open and `spots_remaining <= 20`, a muted "X spots remaining" note appears under the signup submit button. The check **fails open**: a network/parse error leaves the signup form usable and the indicator green. If the beta closes while a user is mid-signup, the backend rejects `POST /signup` and the returned error is shown in the form's error state (no extra handling needed).
 - `forgot-password/index.html` — Request a password-reset email (`POST /forgot-password`).
 - `reset-password/index.html` — Set a new password from an emailed `?token=` link (`POST /reset-password`). Renders an "invalid link" state when the token is missing.
 - `verify-email/index.html` — Confirms an email from a `?token=` link (`GET /verify-email`).
@@ -93,7 +93,7 @@ Backend endpoints this frontend calls:
 | `checkLegalAcceptance()` | `GET` (Bearer) → `{ success, tos_accepted }` | `/legal/status` |
 | `legal-modal.js` (I Agree) | `POST` (Bearer) `{ document: "tos" }` → `{ success }` | `/legal/accept` |
 | download counter (`script.js`) | `POST` (Bearer) | `/download` |
-| home page beta banner | `GET` → `{ beta_active }` | `/beta-status` |
+| `fetchBetaStatus()` (home banner + auth page) | `GET` → `{ success, open, spots_remaining }` | `/beta/status` |
 | forgot-password page / account "Change Password" | `POST` `{ email }` | `/forgot-password` |
 | reset-password page | `POST` `{ token, newPassword }` → `{ success }` | `/reset-password` |
 | verify-email page | `GET` `?token=` → `{ success }` | `/verify-email` |

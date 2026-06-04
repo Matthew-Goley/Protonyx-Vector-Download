@@ -40,6 +40,58 @@
   display: block;
 }
 
+/* Beta status indicator: a small dot + label below the logo. Mirrors the
+   landing page hero indicator. Dot is neutral grey until /beta/status resolves,
+   then green when the beta is open or red when it is full. */
+.auth-beta-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.auth-beta-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.auth-beta-dot.open {
+  background: #22c55e;
+}
+
+.auth-beta-dot.closed {
+  background: #ff6464;
+}
+
+/* Shown in place of the signup form when the beta is full. Reuses the
+   .auth-form show/hide mechanism (display:none until .active). */
+.auth-beta-full {
+  text-align: center;
+  gap: 0.75rem;
+  padding: 1.25rem 0.5rem;
+}
+
+.auth-beta-full p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Subtle "X spots remaining" line near the signup submit button. Muted, not
+   alarming. Only revealed when few spots are left. */
+.auth-spots-note {
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
 .auth-tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
