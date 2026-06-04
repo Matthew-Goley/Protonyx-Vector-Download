@@ -23,16 +23,32 @@
   overflow: hidden;
 }
 
-/* ── Beta banner (pill row above the hero grid) ── */
+/* ── Hero eyebrow row: in-flow anchor that keeps the centered beta
+   banner at the same vertical line as the "Vector" eyebrow ── */
+.landing-hero-eyebrow-row {
+  display: flex;
+  align-items: center;
+}
+
+.landing-hero-eyebrow-row .landing-hero-eyebrow {
+  margin-bottom: 0;
+}
+
+/* ── Beta banner (pill): page-centered, pinned to the eyebrow's height.
+   Absolutely positioned so it overlays at Vector's vertical line without
+   pushing the hero content down. Centered across .landing-hero-inner. ── */
 .beta-banner {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.4rem;
-  flex-wrap: wrap;
-  margin: 0 auto 2rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  margin: 0;
   padding: 0.4rem 1.2rem;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
