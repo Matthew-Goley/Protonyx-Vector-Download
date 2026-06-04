@@ -202,7 +202,7 @@
 .demo-window-body {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1.9188 / 1;
   background: #000;
 }
 
@@ -771,7 +771,7 @@
 }
 
 .discovery-card .demo-window-body {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1.9188 / 1;
 }
 
 .discovery-text {
