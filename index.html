@@ -44,16 +44,6 @@
       <div class="landing-hero-left">
         <div class="landing-hero-eyebrow-row">
           <p class="landing-hero-eyebrow">Vector</p>
-          <div class="beta-banner">
-            <span class="beta-banner-main">
-              <span class="beta-dot" id="betaMainDot" aria-hidden="true" style="background: #ff6464; animation: none;"></span>
-              Open Beta · Live June 5 onward · All Pro features free · No card required
-            </span>
-            <span class="beta-banner-status">
-              <span class="beta-dot" id="betaStatusDot" aria-hidden="true" style="background: #ff6464; animation: none;"></span>
-              <span id="betaStatusText" style="color: rgba(255, 100, 100, 0.8);">Beta Offline</span>
-            </span>
-          </div>
         </div>
         <h1>
           <span class="accent">Actionable</span> <span class="accent">Insight</span><br>
@@ -96,6 +86,11 @@
               <source src="assets/video/1vector_demo.mp4" type="video/mp4">
             </video>
           </div>
+        </div>
+        <div class="beta-banner">
+          <span class="beta-banner-main">Open Beta June 5 Onward</span>
+          <span class="beta-dot" id="betaStatusDot" aria-hidden="true" style="background: #ff6464; animation: none;"></span>
+          <span id="betaStatusText" style="color: rgba(255, 100, 100, 0.8);">Beta Full</span>
         </div>
       </div>
     </div>
@@ -311,24 +306,20 @@
     // The download button stays live regardless: only account creation is gated.
     (async () => {
       const dot = document.getElementById("betaStatusDot");
-      const mainDot = document.getElementById("betaMainDot");
       const text = document.getElementById("betaStatusText");
       const betaNote = document.querySelector(".landing-hero-beta-note");
       if (!dot || !text) return;
       const status = await fetchBetaStatus();
-      if (!status) return; // Leave the default offline state on any failure.
+      if (!status) return;
 
       if (status.open) {
         dot.style.background = "#22c55e";
         dot.style.animation = "";
-        if (mainDot) {
-          mainDot.style.background = "#22c55e";
-          mainDot.style.animation = "";
-        }
-        text.style.color = "";
-        text.textContent = "Open Beta";
+        text.style.color = "rgba(45, 212, 191, 0.85)";
+        text.textContent = "Active";
       } else {
         dot.style.background = "#ff6464";
+        dot.style.animation = "none";
         text.style.color = "rgba(255, 100, 100, 0.8)";
         text.textContent = "Beta Full";
         if (betaNote) betaNote.textContent = "Beta Full";
