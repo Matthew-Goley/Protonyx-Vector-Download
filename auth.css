@@ -107,7 +107,7 @@
   background: transparent;
   border: none;
   border-radius: 8px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.55);
@@ -150,7 +150,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   color: white;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s ease, background 0.2s ease;
@@ -168,7 +168,7 @@
   color: white;
   border: none;
   border-radius: 10px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;

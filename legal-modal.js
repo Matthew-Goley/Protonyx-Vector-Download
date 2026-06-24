@@ -54,7 +54,7 @@
         "border: 1px solid var(--border)",
         "border-radius: 14px",
         "padding: 2rem",
-        "font-family: 'IBM Plex Mono', monospace",
+        "font-family: 'Sora', sans-serif",
         "box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45)",
       ].join(";");
 
@@ -98,7 +98,7 @@
         "color: #fff",
         "border: none",
         "border-radius: 10px",
-        "font-family: 'IBM Plex Mono', monospace",
+        "font-family: 'Sora', sans-serif",
         "font-weight: 600",
         "font-size: 1rem",
         "cursor: pointer",

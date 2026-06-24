@@ -106,7 +106,7 @@
   display: none;
   padding: 0 4px;
   color: rgba(255, 255, 255, 0.9);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
@@ -128,7 +128,7 @@
   display: none;
   padding: 0 4px;
   color: rgba(255, 255, 255, 0.9);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.02em;

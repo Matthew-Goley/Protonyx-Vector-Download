@@ -28,7 +28,7 @@ html {
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   font-size: 16px;
   line-height: 1.7;
 }
@@ -95,7 +95,7 @@ p {
   border-radius: 10px;
   font-weight: 600;
   font-size: 1rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: border-color 0.2s, color 0.2s;
 }
@@ -114,7 +114,7 @@ p {
   color: white;
   border: none;
   border-radius: 10px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
@@ -136,7 +136,7 @@ p {
   color: rgba(31, 34, 48, 0.55);
   border: 1px solid rgba(31, 34, 48, 0.35);
   border-radius: 8px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Sora', sans-serif;
   font-weight: 600;
   font-size: 0.85rem;
   letter-spacing: 0.02em;

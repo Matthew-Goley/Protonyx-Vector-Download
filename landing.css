@@ -54,7 +54,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   font-size: 0.8rem;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "Sora", sans-serif;
 }
 
 .beta-banner-main {
@@ -182,7 +182,7 @@
 .landing-hero-beta-note {
   margin-top: 0.5rem;
   font-size: 0.78rem;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "Sora", sans-serif;
   color: rgba(255, 255, 255, 0.45);
   text-align: center;
 }
