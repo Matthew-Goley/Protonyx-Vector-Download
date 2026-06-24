@@ -787,7 +787,11 @@
 }
 
 .discovery-card .demo-window-body {
-  aspect-ratio: 1.9188 / 1;
+  aspect-ratio: auto;
+}
+
+.discovery-card .demo-video {
+  height: auto;
 }
 
 .discovery-text {
