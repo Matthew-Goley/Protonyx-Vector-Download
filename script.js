@@ -87,6 +87,10 @@ if (menuButton && menuOverlay && menuCloseButton) {
   menuOverlay.addEventListener("click", (e) => {
     if (e.target === menuOverlay) closeMenu();
   });
+
+  menuOverlay.querySelectorAll("a[href]").forEach((link) => {
+    link.addEventListener("click", () => closeMenu());
+  });
 }
 
 
